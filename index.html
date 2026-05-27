@@ -5,8 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Church of God | Sabbath-Keeping</title>
     
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
+    <!-- Custom Tailwind Configuration to match the logo colors perfectly -->
     <script>
         tailwind.config = {
             theme: {
@@ -25,43 +27,52 @@
         }
     </script>
 
+    <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
 
+    <!-- Custom Animations -->
     <style>
-        /* Base reveal classes */
-        .reveal-up {
-            opacity: 0;
-            transform: translateY(40px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
-        .reveal-fade {
-            opacity: 0;
-            transition: opacity 1s ease-out;
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
         
-        /* The class added when scrolled into view */
-        .is-visible {
-            opacity: 1 !important;
-            transform: translateY(0) !important;
+        /* Base states before animation triggers */
+        .animate-fade-in-up {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        .animate-fade-in {
+            opacity: 0;
         }
 
-        /* Stagger Delays */
-        .stagger-1 { transition-delay: 100ms; }
-        .stagger-2 { transition-delay: 200ms; }
-        .stagger-3 { transition-delay: 300ms; }
-        .stagger-4 { transition-delay: 400ms; }
-        .stagger-5 { transition-delay: 500ms; }
+        /* Active animation classes triggered by IntersectionObserver */
+        .animate-fade-in-up.play-anim {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+        .animate-fade-in.play-anim {
+            animation: fadeIn 1s ease-out forwards;
+        }
+
+        /* Staggering delays for grouped elements */
+        .stagger-1.play-anim { animation-delay: 100ms; }
+        .stagger-2.play-anim { animation-delay: 200ms; }
+        .stagger-3.play-anim { animation-delay: 300ms; }
+        .stagger-4.play-anim { animation-delay: 400ms; }
         
-        /* Smooth scrolling container (Updated to 100dvh to fix mobile footer cutoff) */
+        /* Smooth scrolling container */
         html, body {
             height: 100%;
-            height: 100dvh;
             overflow: hidden;
             background-color: #f8f9fa;
         }
         #app-container {
-            height: 100%;
-            height: 100dvh;
+            height: 100vh; /* Fallback for older browsers */
+            height: 100dvh; /* Dynamic viewport height to fix mobile cut-offs */
             overflow-y: auto;
             overflow-x: hidden;
             scroll-behavior: smooth;
@@ -72,14 +83,17 @@
 
 <div id="app-container" class="flex flex-col">
 
+    <!-- Top Announcement Bar -->
     <div onclick="navigateTo('live_stream')" class="bg-brand-primary text-white text-xs md:text-sm font-semibold py-3 px-4 text-center tracking-[0.15em] flex items-center justify-center gap-3 cursor-pointer hover:bg-brand-dark transition-colors">
         <i data-lucide="play-circle" class="text-brand-accent animate-pulse" width="16" height="16"></i> LIVE STREAMING SATURDAY AT 11:30AM
     </div>
 
+    <!-- Modern Navbar -->
     <nav class="bg-white/95 backdrop-blur-lg sticky top-0 z-50 border-b border-brand-neutral/30 shadow-sm transition-all duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-28">
                 
+                <!-- Logo Area -->
                 <div class="flex items-center gap-5 cursor-pointer group" onclick="navigateTo('home')">
                     <div class="h-14 w-14 bg-brand-neutral/20 border border-brand-neutral rounded-full flex items-center justify-center text-brand-primary shadow-sm group-hover:bg-brand-primary group-hover:text-white group-hover:scale-105 group-hover:rotate-3 transition-all duration-500">
                         <div class="h-10 w-10 border border-current rounded-full flex items-center justify-center">
@@ -92,6 +106,7 @@
                     </div>
                 </div>
 
+                <!-- Desktop Nav -->
                 <div class="hidden lg:flex space-x-10 items-center" id="desktop-nav">
                     
                     <button data-target="home" onclick="navigateTo('home')" class="nav-btn text-sm font-semibold tracking-wider uppercase transition duration-300 pb-1 border-b-2 text-slate-500 border-transparent hover:text-brand-primary">
@@ -160,6 +175,7 @@
                     </button>
                 </div>
 
+                <!-- Mobile Menu Button -->
                 <div class="lg:hidden flex items-center">
                     <button onclick="toggleMobileMenu()" class="text-brand-primary hover:text-brand-secondary focus:outline-none transition-colors">
                         <i data-lucide="menu" id="icon-menu" width="32" height="32" stroke-width="1.5"></i>
@@ -169,6 +185,7 @@
             </div>
         </div>
 
+        <!-- Mobile Nav Dropdown -->
         <div id="mobile-menu" class="lg:hidden bg-white border-t border-brand-neutral/30 absolute w-full shadow-2xl z-50 transition-all duration-500 ease-in-out max-h-0 opacity-0 overflow-hidden">
             <div class="px-6 pt-4 pb-8 space-y-2 flex flex-col">
                 
@@ -234,23 +251,26 @@
         </div>
     </nav>
 
+    <!-- Main Page Content -->
     <main class="flex-grow bg-white relative">
         
+        <!-- PAGE: HOME -->
         <div id="page-home" class="page-section hidden">
-            <section class="relative h-[800px] flex items-center justify-center text-center px-4 reveal-fade" style="background-image: url('https://images.unsplash.com/photo-1490730141103-6cac27aaab94?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80'); background-size: cover; background-position: center; background-attachment: fixed;">
+            <!-- Hero Section -->
+            <section class="relative h-[800px] flex items-center justify-center text-center px-4 animate-fade-in" style="background-image: url('https://images.unsplash.com/photo-1490730141103-6cac27aaab94?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80'); background-size: cover; background-position: center; background-attachment: fixed;">
                 <div class="absolute inset-0 bg-gradient-to-b from-brand-dark/90 via-brand-primary/60 to-brand-dark/90"></div>
                 <div class="relative z-10 max-w-4xl mx-auto text-white mt-12 px-4">
-                    <h2 class="text-xs md:text-sm font-semibold tracking-[0.4em] uppercase mb-8 text-brand-neutral reveal-up stagger-1">
+                    <h2 class="text-xs md:text-sm font-semibold tracking-[0.4em] uppercase mb-8 text-brand-neutral animate-fade-in-up stagger-1">
                         Inspire, Uplift and Bless You
                     </h2>
-                    <h1 class="text-5xl md:text-7xl font-light mb-8 leading-tight reveal-up stagger-2">
+                    <h1 class="text-5xl md:text-7xl font-light mb-8 leading-tight animate-fade-in-up stagger-2">
                         Welcome to the <br class="hidden md:block"/>
                         <span class="font-extrabold text-white">Church of God</span>
                     </h1>
-                    <p class="text-lg md:text-xl mb-14 font-light max-w-2xl mx-auto text-white/80 reveal-up stagger-3">
+                    <p class="text-lg md:text-xl mb-14 font-light max-w-2xl mx-auto text-white/80 animate-fade-in-up stagger-3">
                         We appreciate that you have taken the time to come by and visit us. Come by often, you are always welcome, online or in person. <br/><span class="font-medium text-white italic mt-3 block">Be Blessed.</span>
                     </p>
-                    <div class="reveal-up stagger-4">
+                    <div class="animate-fade-in-up stagger-4">
                         <button onclick="navigateTo('about')" class="bg-brand-neutral text-brand-dark font-bold py-4 px-10 rounded-full text-lg shadow-xl hover:shadow-2xl hover:bg-white hover:-translate-y-1 hover:scale-105 transition-all duration-300">
                             Learn More About Us
                         </button>
@@ -258,7 +278,8 @@
                 </div>
             </section>
 
-            <div class="relative z-20 -mt-16 px-4 reveal-up stagger-2">
+            <!-- Captivating Overlapping Service Time Banner -->
+            <div class="relative z-20 -mt-16 px-4 animate-fade-in-up stagger-2">
                 <section class="max-w-5xl mx-auto bg-white rounded-2xl shadow-2xl shadow-brand-dark/10 py-10 text-center border border-brand-neutral/30 hover:shadow-brand-dark/20 transition-shadow duration-500">
                     <h2 class="text-xl md:text-2xl text-brand-dark font-extrabold tracking-[0.2em] uppercase">
                         Service Time <span class="text-brand-neutral font-light mx-4">|</span> Saturdays at 11:30 AM
@@ -266,9 +287,10 @@
                 </section>
             </div>
 
+            <!-- Two Ways to Join Section -->
             <section class="py-32 bg-white">
                 <div class="max-w-7xl mx-auto px-4 text-center">
-                    <div class="mb-20 reveal-up stagger-1">
+                    <div class="mb-20 animate-fade-in-up stagger-1">
                         <h2 class="text-4xl font-extrabold text-slate-800 tracking-wide">
                             TWO WAYS TO <span class="text-brand-primary font-light">JOIN</span> US
                         </h2>
@@ -276,7 +298,8 @@
                     </div>
                     
                     <div class="grid md:grid-cols-2 gap-16 max-w-5xl mx-auto">
-                        <div class="bg-brand-neutral/10 rounded-3xl border border-brand-neutral/30 overflow-hidden hover:shadow-2xl hover:shadow-brand-secondary/30 transition-all duration-500 group reveal-up stagger-2 hover:-translate-y-2">
+                        <!-- In Person Card -->
+                        <div class="bg-brand-neutral/10 rounded-3xl border border-brand-neutral/30 overflow-hidden hover:shadow-2xl hover:shadow-brand-secondary/30 transition-all duration-500 group animate-fade-in-up stagger-2 hover:-translate-y-2">
                             <div class="relative overflow-hidden h-80">
                                 <img src="https://images.pexels.com/photos/1763075/pexels-photo-1763075.jpeg?auto=compress&cs=tinysrgb&w=800" alt="In Person Worship" class="w-full h-full object-cover grayscale-[30%] group-hover:grayscale-0 group-hover:scale-110 transition duration-700"/>
                             </div>
@@ -289,7 +312,8 @@
                             </div>
                         </div>
 
-                        <div class="bg-brand-neutral/10 rounded-3xl border border-brand-neutral/30 overflow-hidden hover:shadow-2xl hover:shadow-brand-secondary/30 transition-all duration-500 group reveal-up stagger-3 hover:-translate-y-2">
+                        <!-- Online Card -->
+                        <div class="bg-brand-neutral/10 rounded-3xl border border-brand-neutral/30 overflow-hidden hover:shadow-2xl hover:shadow-brand-secondary/30 transition-all duration-500 group animate-fade-in-up stagger-3 hover:-translate-y-2">
                             <div class="relative overflow-hidden h-80 bg-brand-dark">
                                 <img src="https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Online Worship" class="w-full h-full object-cover opacity-60 group-hover:opacity-30 group-hover:scale-110 transition duration-700"/>
                                 <div class="absolute inset-0 flex items-center justify-center">
@@ -308,9 +332,10 @@
                 </div>
             </section>
 
+            <!-- Get Connected Section -->
             <section class="py-32 bg-brand-neutral/5 border-t border-brand-neutral/20">
                 <div class="max-w-7xl mx-auto px-4 grid md:grid-cols-2 gap-20 items-center">
-                    <div class="reveal-up stagger-1">
+                    <div class="animate-fade-in-up stagger-1">
                         <h2 class="text-4xl font-extrabold text-slate-800 mb-4 tracking-wide">
                             MORE WAYS TO <br/>GET <span class="text-brand-primary font-light">CONNECTED</span>
                         </h2>
@@ -350,15 +375,16 @@
                             </li>
                         </ul>
                     </div>
-                    <div class="hidden md:block rounded-[2.5rem] overflow-hidden shadow-2xl shadow-brand-dark/20 h-[800px] reveal-up stagger-3">
+                    <div class="hidden md:block rounded-[2.5rem] overflow-hidden shadow-2xl shadow-brand-dark/20 h-[800px] animate-fade-in-up stagger-3">
                         <img src="https://images.unsplash.com/photo-1529070538774-1843cb3265df?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Community Connection" class="w-full h-full object-cover hover:scale-110 transition duration-[1.5s] ease-out grayscale-[15%] mix-blend-multiply opacity-90"/>
                     </div>
                 </div>
             </section>
 
+            <!-- Location Section -->
             <section class="py-24 bg-white border-t border-brand-neutral/20 relative overflow-hidden">
                 <div class="max-w-7xl mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
-                    <div class="reveal-up stagger-1">
+                    <div class="animate-fade-in-up stagger-1">
                         <h2 class="text-4xl font-extrabold text-slate-800 mb-4 tracking-wide">
                             OUR <span class="text-brand-primary font-light">LOCATION</span>
                         </h2>
@@ -382,11 +408,14 @@
                         </a>
                     </div>
                     
-                    <div class="rounded-[2.5rem] overflow-hidden shadow-2xl h-[400px] reveal-up stagger-2 relative group border-4 border-white">
+                    <!-- Clickable Map Preview -->
+                    <div class="rounded-[2.5rem] overflow-hidden shadow-2xl h-[400px] animate-fade-in-up stagger-2 relative group border-4 border-white">
                         <a href="https://maps.app.goo.gl/e1DS9rbSDKhefUmD9" target="_blank" rel="noopener noreferrer" class="block w-full h-full relative cursor-pointer">
                             <div class="absolute inset-0 bg-transparent z-10 pointer-events-none"></div>
+                            <!-- Full color map that zooms on hover -->
                             <iframe src="https://maps.google.com/maps?q=6%20Westwyn%20Crt,%20Brampton,%20ON&t=&z=14&ie=UTF8&iwloc=&output=embed" width="100%" height="100%" style="border:0; pointer-events:none;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" class="absolute inset-0 z-0 transform group-hover:scale-105 transition-transform duration-700"></iframe>
                             
+                            <!-- Overlay Button -->
                             <div class="absolute inset-0 z-20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
                                 <div class="bg-white/95 backdrop-blur-sm text-brand-primary font-bold py-4 px-8 rounded-full shadow-2xl flex items-center gap-3 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
                                     Open in Google Maps <i data-lucide="map" width="20" height="20"></i>
@@ -398,26 +427,31 @@
             </section>
         </div>
 
+        <!-- PAGE: LIVE STREAM -->
         <div id="page-live_stream" class="page-section hidden bg-brand-neutral/5 min-h-screen">
-            <section class="relative bg-brand-dark py-28 px-4 overflow-hidden border-b border-brand-neutral/50 reveal-fade">
+            <!-- Custom Brand Hero -->
+            <section class="relative bg-brand-dark py-28 px-4 overflow-hidden border-b border-brand-neutral/50">
                 <div class="absolute inset-0 opacity-20 bg-[url('https://images.unsplash.com/photo-1516321497487-e288fb19713f?auto=format&fit=crop&w=1920&q=80')] bg-cover bg-center mix-blend-overlay"></div>
-                <div class="relative z-10 max-w-5xl mx-auto text-center reveal-up">
+                <div class="relative z-10 max-w-5xl mx-auto text-center animate-fade-in-up">
                     <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight text-white uppercase">
                         <span class="text-brand-accent">LIVE</span> STREAM
                     </h1>
                 </div>
             </section>
             
-            <section class="py-20 px-4 max-w-5xl mx-auto reveal-up stagger-1">
+            <section class="py-20 px-4 max-w-5xl mx-auto animate-fade-in-up stagger-1">
+                <!-- Video Player Container -->
                 <div class="bg-white p-4 rounded-3xl shadow-2xl border border-brand-neutral/30">
-                    <div class="relative w-full overflow-hidden rounded-2xl bg-black" style="padding-top: 56.25%;"> 
-                        <!-- Updated to use a working placeholder instead of the broken YOUR_CHANNEL_ID -->
-                        <iframe class="absolute top-0 left-0 w-full h-full border-0" src="https://www.youtube.com/embed/C3vvk5F7Efc" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <div class="relative w-full overflow-hidden rounded-2xl bg-black aspect-video">
+                        <!-- REPLACE "YOUR_CHANNEL_ID" BELOW WITH YOUR ACTUAL YOUTUBE CHANNEL ID -->
+                        <iframe class="absolute top-0 left-0 w-full h-full border-0" src="https://www.youtube.com/embed/live_stream?channel=YOUR_CHANNEL_ID" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     </div>
                 </div>
                 
-                <div class="text-center mt-12 bg-white p-12 rounded-3xl shadow-lg border border-brand-neutral/20 reveal-up stagger-2">
+                <!-- Archive/Fallback call to action -->
+                <div class="text-center mt-12 bg-white p-12 rounded-3xl shadow-lg border border-brand-neutral/20 animate-fade-in-up stagger-2">
                     <div class="flex justify-center mb-6">
+                        <!-- Replaced Lucide YouTube icon with raw SVG -->
                         <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-red-600"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon></svg>
                     </div>
                     <h3 class="text-2xl font-bold text-slate-800 mb-4">Did you miss a service?</h3>
@@ -429,19 +463,20 @@
             </section>
         </div>
 
+        <!-- PAGE: ABOUT -->
         <div id="page-about" class="page-section hidden bg-brand-neutral/5 min-h-screen">
-            <section class="bg-white py-24 text-center border-b border-brand-neutral/30 shadow-sm px-4 reveal-fade relative overflow-hidden">
+            <section class="bg-white py-24 text-center border-b border-brand-neutral/30 shadow-sm px-4 animate-fade-in relative overflow-hidden">
                 <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#dad7d2_1px,transparent_1px)] [background-size:20px_20px]"></div>
                 <div class="relative z-10">
-                    <h1 class="text-4xl md:text-5xl font-extrabold text-slate-800 mb-4 tracking-tight uppercase reveal-up">
+                    <h1 class="text-4xl md:text-5xl font-extrabold text-slate-800 mb-4 tracking-tight uppercase">
                         LEARN MORE ABOUT <span class="text-brand-primary font-light ml-2">US</span>
                     </h1>
-                    <div class="h-1 w-20 bg-brand-secondary mx-auto mt-6 rounded-full mb-8 reveal-up stagger-1"></div>
+                    <div class="h-1 w-20 bg-brand-secondary mx-auto mt-6 rounded-full mb-8"></div>
                 </div>
             </section>
 
             <section class="py-24 px-4 max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center overflow-hidden">
-                <div class="reveal-up stagger-1">
+                <div class="animate-fade-in-up stagger-1">
                     <h2 class="text-3xl font-extrabold text-slate-800 mb-6 text-center md:text-left tracking-wide">WHO WE ARE</h2>
                     <p class="text-xl text-slate-600 font-light leading-relaxed mb-10 text-center md:text-left">
                         We are a Christ-centered Christian church with commitment to the sole authority of scriptures and the leading of the Holy Spirit, with a mission to bring Christ to the hearts of fallen, broken and hurting people.
@@ -465,12 +500,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="hidden md:block reveal-up stagger-2 rounded-3xl overflow-hidden shadow-2xl border border-brand-neutral/30">
+                <div class="hidden md:block animate-fade-in-up stagger-2 rounded-3xl overflow-hidden shadow-2xl border border-brand-neutral/30">
                     <img src="https://images.unsplash.com/photo-1519074069444-1ba4fff66d16?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Bible Study" class="w-full h-[700px] object-cover hover:scale-110 transition duration-1000"/>
                 </div>
             </section>
             <section class="bg-white py-24 px-4 border-t border-brand-neutral/30">
-                <div class="max-w-4xl mx-auto reveal-up stagger-3">
+                <div class="max-w-4xl mx-auto animate-fade-in-up stagger-3">
                     <div class="text-center mb-16">
                         <h2 class="text-3xl md:text-4xl font-extrabold text-slate-800 mb-6 tracking-wide">OUR CORE BELIEFS</h2>
                         <p class="text-slate-600 font-light text-lg max-w-2xl mx-auto leading-relaxed">
@@ -547,7 +582,7 @@
                                 </div>
                             </button>
                             <div class="overflow-hidden transition-all duration-500 ease-in-out max-h-0 opacity-0 accordion-content">
-                                <p class="text-slate-600 font-light leading-relaxed pb-6">We believe the Sabbath, which preceded the nation and laws of Israel, to be God's model and intent for his people to take a meaningful break from their regular activities to offer sacrifices of praise, celebrate, worship, fellowship, and become spiritually renewed as they build their relationship with him and their fellowship with fellow believers.</p>
+                                <p class="text-slate-600 font-light leading-relaxed pb-6">We believe the Sabbath, which preceded the nation and laws of Israel, to be God&#039;s model and intent for his people to take a meaningful break from their regular activities to offer sacrifices of praise, celebrate, worship, fellowship, and become spiritually renewed as they build their relationship with him and their fellowship with fellow believers.</p>
                             </div>
                         </div>
 
@@ -556,28 +591,30 @@
             </section>
         </div>
 
+        <!-- PAGE: LEADERSHIP -->
         <div id="page-leadership" class="page-section hidden bg-brand-neutral/5 min-h-screen relative">
-            <section class="bg-white py-24 text-center border-b border-brand-neutral/30 shadow-sm px-4 reveal-fade relative overflow-hidden">
+            <section class="bg-white py-24 text-center border-b border-brand-neutral/30 shadow-sm px-4 animate-fade-in relative overflow-hidden">
                 <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#dad7d2_1px,transparent_1px)] [background-size:20px_20px]"></div>
                 <div class="relative z-10">
-                    <h1 class="text-4xl md:text-5xl font-extrabold text-slate-800 mb-4 tracking-tight uppercase reveal-up">
+                    <h1 class="text-4xl md:text-5xl font-extrabold text-slate-800 mb-4 tracking-tight uppercase">
                         OUR <span class="text-brand-primary font-light ml-2">LEADERSHIP</span>
                     </h1>
-                    <div class="h-1 w-20 bg-brand-secondary mx-auto mt-6 rounded-full mb-8 reveal-up stagger-1"></div>
-                    <p class="text-lg text-slate-600 font-light max-w-4xl mx-auto leading-relaxed reveal-up stagger-2">Meet the dedicated team serving our church community.</p>
+                    <div class="h-1 w-20 bg-brand-secondary mx-auto mt-6 rounded-full mb-8"></div>
+                    <p class="text-lg text-slate-600 font-light max-w-4xl mx-auto leading-relaxed animate-fade-in-up stagger-1">Meet the dedicated team serving our church community.</p>
                 </div>
             </section>
 
             <section class="py-24 px-4 max-w-7xl mx-auto">
                 
+                <!-- Lead Pastors -->
                 <div class="mb-24 last:mb-0">
-                    <div class="text-center mb-12 reveal-up stagger-1">
+                    <div class="text-center mb-12 animate-fade-in-up stagger-1">
                         <h2 class="text-3xl font-extrabold text-slate-800 tracking-wider uppercase">Lead Pastors</h2>
                         <div class="h-1 w-16 bg-brand-primary mx-auto mt-4 rounded-full"></div>
                     </div>
                     
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 max-w-4xl mx-auto gap-8">
-                        <div onclick="openBioModal(0)" class="bg-white rounded-[2rem] overflow-hidden shadow-xl border border-brand-neutral/30 cursor-pointer group hover:-translate-y-2 hover:shadow-2xl hover:border-brand-primary/50 transition-all duration-500 reveal-up stagger-2">
+                        <div onclick="openBioModal(0)" class="bg-white rounded-[2rem] overflow-hidden shadow-xl border border-brand-neutral/30 cursor-pointer group hover:-translate-y-2 hover:shadow-2xl hover:border-brand-primary/50 transition-all duration-500 animate-fade-in-up stagger-2">
                             <div class="relative h-72 overflow-hidden">
                                 <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=500&q=80" alt="Dr. Clarence Duff" class="w-full h-full object-cover grayscale-[20%] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"/>
                                 <div class="absolute inset-0 bg-brand-dark/0 group-hover:bg-brand-dark/40 transition-colors duration-500 flex items-center justify-center">
@@ -592,7 +629,7 @@
                             </div>
                         </div>
 
-                        <div onclick="openBioModal(1)" class="bg-white rounded-[2rem] overflow-hidden shadow-xl border border-brand-neutral/30 cursor-pointer group hover:-translate-y-2 hover:shadow-2xl hover:border-brand-primary/50 transition-all duration-500 reveal-up stagger-3">
+                        <div onclick="openBioModal(1)" class="bg-white rounded-[2rem] overflow-hidden shadow-xl border border-brand-neutral/30 cursor-pointer group hover:-translate-y-2 hover:shadow-2xl hover:border-brand-primary/50 transition-all duration-500 animate-fade-in-up stagger-3">
                             <div class="relative h-72 overflow-hidden">
                                 <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=500&q=80" alt="Pastor David Brown" class="w-full h-full object-cover grayscale-[20%] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"/>
                                 <div class="absolute inset-0 bg-brand-dark/0 group-hover:bg-brand-dark/40 transition-colors duration-500 flex items-center justify-center">
@@ -609,14 +646,15 @@
                     </div>
                 </div>
 
+                <!-- Ministry Pastors -->
                 <div class="mb-24 last:mb-0">
-                    <div class="text-center mb-12 reveal-up stagger-1">
+                    <div class="text-center mb-12 animate-fade-in-up stagger-1">
                         <h2 class="text-3xl font-extrabold text-slate-800 tracking-wider uppercase">Ministry Pastors</h2>
                         <div class="h-1 w-16 bg-brand-primary mx-auto mt-4 rounded-full"></div>
                     </div>
                     
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 max-w-4xl mx-auto gap-8">
-                        <div onclick="openBioModal(2)" class="bg-white rounded-[2rem] overflow-hidden shadow-xl border border-brand-neutral/30 cursor-pointer group hover:-translate-y-2 hover:shadow-2xl hover:border-brand-primary/50 transition-all duration-500 reveal-up stagger-4">
+                        <div onclick="openBioModal(2)" class="bg-white rounded-[2rem] overflow-hidden shadow-xl border border-brand-neutral/30 cursor-pointer group hover:-translate-y-2 hover:shadow-2xl hover:border-brand-primary/50 transition-all duration-500 animate-fade-in-up stagger-4">
                             <div class="relative h-72 overflow-hidden">
                                 <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=500&q=80" alt="Hibbert Hamilton" class="w-full h-full object-cover grayscale-[20%] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"/>
                                 <div class="absolute inset-0 bg-brand-dark/0 group-hover:bg-brand-dark/40 transition-colors duration-500 flex items-center justify-center">
@@ -631,7 +669,7 @@
                             </div>
                         </div>
 
-                        <div onclick="openBioModal(3)" class="bg-white rounded-[2rem] overflow-hidden shadow-xl border border-brand-neutral/30 cursor-pointer group hover:-translate-y-2 hover:shadow-2xl hover:border-brand-primary/50 transition-all duration-500 reveal-up stagger-1">
+                        <div onclick="openBioModal(3)" class="bg-white rounded-[2rem] overflow-hidden shadow-xl border border-brand-neutral/30 cursor-pointer group hover:-translate-y-2 hover:shadow-2xl hover:border-brand-primary/50 transition-all duration-500 animate-fade-in-up stagger-1">
                             <div class="relative h-72 overflow-hidden">
                                 <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=500&q=80" alt="Dwayne Blair" class="w-full h-full object-cover grayscale-[20%] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"/>
                                 <div class="absolute inset-0 bg-brand-dark/0 group-hover:bg-brand-dark/40 transition-colors duration-500 flex items-center justify-center">
@@ -648,14 +686,15 @@
                     </div>
                 </div>
 
+                <!-- Ministers & Evangelist -->
                 <div class="mb-24 last:mb-0">
-                    <div class="text-center mb-12 reveal-up stagger-1">
+                    <div class="text-center mb-12 animate-fade-in-up stagger-1">
                         <h2 class="text-3xl font-extrabold text-slate-800 tracking-wider uppercase">Ministers & Evangelist</h2>
                         <div class="h-1 w-16 bg-brand-primary mx-auto mt-4 rounded-full"></div>
                     </div>
                     
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-                        <div onclick="openBioModal(4)" class="bg-white rounded-[2rem] overflow-hidden shadow-xl border border-brand-neutral/30 cursor-pointer group hover:-translate-y-2 hover:shadow-2xl hover:border-brand-primary/50 transition-all duration-500 reveal-up stagger-2">
+                        <div onclick="openBioModal(4)" class="bg-white rounded-[2rem] overflow-hidden shadow-xl border border-brand-neutral/30 cursor-pointer group hover:-translate-y-2 hover:shadow-2xl hover:border-brand-primary/50 transition-all duration-500 animate-fade-in-up stagger-2">
                             <div class="relative h-72 overflow-hidden">
                                 <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=500&q=80" alt="Michael Hall" class="w-full h-full object-cover grayscale-[20%] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"/>
                                 <div class="absolute inset-0 bg-brand-dark/0 group-hover:bg-brand-dark/40 transition-colors duration-500 flex items-center justify-center">
@@ -670,7 +709,7 @@
                             </div>
                         </div>
 
-                        <div onclick="openBioModal(5)" class="bg-white rounded-[2rem] overflow-hidden shadow-xl border border-brand-neutral/30 cursor-pointer group hover:-translate-y-2 hover:shadow-2xl hover:border-brand-primary/50 transition-all duration-500 reveal-up stagger-3">
+                        <div onclick="openBioModal(5)" class="bg-white rounded-[2rem] overflow-hidden shadow-xl border border-brand-neutral/30 cursor-pointer group hover:-translate-y-2 hover:shadow-2xl hover:border-brand-primary/50 transition-all duration-500 animate-fade-in-up stagger-3">
                             <div class="relative h-72 overflow-hidden">
                                 <img src="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?auto=format&fit=crop&w=500&q=80" alt="Kelton Ollivierre" class="w-full h-full object-cover grayscale-[20%] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"/>
                                 <div class="absolute inset-0 bg-brand-dark/0 group-hover:bg-brand-dark/40 transition-colors duration-500 flex items-center justify-center">
@@ -685,7 +724,7 @@
                             </div>
                         </div>
 
-                        <div onclick="openBioModal(6)" class="bg-white rounded-[2rem] overflow-hidden shadow-xl border border-brand-neutral/30 cursor-pointer group hover:-translate-y-2 hover:shadow-2xl hover:border-brand-primary/50 transition-all duration-500 reveal-up stagger-4">
+                        <div onclick="openBioModal(6)" class="bg-white rounded-[2rem] overflow-hidden shadow-xl border border-brand-neutral/30 cursor-pointer group hover:-translate-y-2 hover:shadow-2xl hover:border-brand-primary/50 transition-all duration-500 animate-fade-in-up stagger-4">
                             <div class="relative h-72 overflow-hidden">
                                 <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=500&q=80" alt="Andrew Rose" class="w-full h-full object-cover grayscale-[20%] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"/>
                                 <div class="absolute inset-0 bg-brand-dark/0 group-hover:bg-brand-dark/40 transition-colors duration-500 flex items-center justify-center">
@@ -700,7 +739,7 @@
                             </div>
                         </div>
 
-                        <div onclick="openBioModal(7)" class="bg-white rounded-[2rem] overflow-hidden shadow-xl border border-brand-neutral/30 cursor-pointer group hover:-translate-y-2 hover:shadow-2xl hover:border-brand-primary/50 transition-all duration-500 reveal-up stagger-1">
+                        <div onclick="openBioModal(7)" class="bg-white rounded-[2rem] overflow-hidden shadow-xl border border-brand-neutral/30 cursor-pointer group hover:-translate-y-2 hover:shadow-2xl hover:border-brand-primary/50 transition-all duration-500 animate-fade-in-up stagger-1">
                             <div class="relative h-72 overflow-hidden">
                                 <img src="https://images.unsplash.com/photo-1552058544-f2b08422138a?auto=format&fit=crop&w=500&q=80" alt="Chase Ricketts" class="w-full h-full object-cover grayscale-[20%] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"/>
                                 <div class="absolute inset-0 bg-brand-dark/0 group-hover:bg-brand-dark/40 transition-colors duration-500 flex items-center justify-center">
@@ -717,14 +756,15 @@
                     </div>
                 </div>
 
+                <!-- Elders & Deacons -->
                 <div class="mb-24 last:mb-0">
-                    <div class="text-center mb-12 reveal-up stagger-1">
+                    <div class="text-center mb-12 animate-fade-in-up stagger-1">
                         <h2 class="text-3xl font-extrabold text-slate-800 tracking-wider uppercase">Elders & Deacons</h2>
                         <div class="h-1 w-16 bg-brand-primary mx-auto mt-4 rounded-full"></div>
                     </div>
                     
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 max-w-4xl mx-auto gap-8">
-                        <div onclick="openBioModal(8)" class="bg-white rounded-[2rem] overflow-hidden shadow-xl border border-brand-neutral/30 cursor-pointer group hover:-translate-y-2 hover:shadow-2xl hover:border-brand-primary/50 transition-all duration-500 reveal-up stagger-2">
+                        <div onclick="openBioModal(8)" class="bg-white rounded-[2rem] overflow-hidden shadow-xl border border-brand-neutral/30 cursor-pointer group hover:-translate-y-2 hover:shadow-2xl hover:border-brand-primary/50 transition-all duration-500 animate-fade-in-up stagger-2">
                             <div class="relative h-72 overflow-hidden">
                                 <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=500&q=80" alt="Marcel Cousins" class="w-full h-full object-cover grayscale-[20%] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"/>
                                 <div class="absolute inset-0 bg-brand-dark/0 group-hover:bg-brand-dark/40 transition-colors duration-500 flex items-center justify-center">
@@ -739,7 +779,7 @@
                             </div>
                         </div>
 
-                        <div onclick="openBioModal(9)" class="bg-white rounded-[2rem] overflow-hidden shadow-xl border border-brand-neutral/30 cursor-pointer group hover:-translate-y-2 hover:shadow-2xl hover:border-brand-primary/50 transition-all duration-500 reveal-up stagger-3">
+                        <div onclick="openBioModal(9)" class="bg-white rounded-[2rem] overflow-hidden shadow-xl border border-brand-neutral/30 cursor-pointer group hover:-translate-y-2 hover:shadow-2xl hover:border-brand-primary/50 transition-all duration-500 animate-fade-in-up stagger-3">
                             <div class="relative h-72 overflow-hidden">
                                 <img src="https://images.unsplash.com/photo-1519345182560-3f2917c472ef?auto=format&fit=crop&w=500&q=80" alt="Leonard Bryan" class="w-full h-full object-cover grayscale-[20%] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"/>
                                 <div class="absolute inset-0 bg-brand-dark/0 group-hover:bg-brand-dark/40 transition-colors duration-500 flex items-center justify-center">
@@ -758,6 +798,7 @@
 
             </section>
             
+            <!-- Global Bio Modal -->
             <div id="bio-modal" class="fixed inset-0 z-[100] flex items-center justify-center px-4 opacity-0 pointer-events-none transition-opacity duration-300">
                 <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm" onclick="closeBioModal()"></div>
                 <div class="bg-white w-full max-w-3xl rounded-[2rem] shadow-2xl relative z-10 transform scale-95 transition-transform duration-300 max-h-[90vh] flex flex-col" id="bio-modal-content">
@@ -777,86 +818,79 @@
             </div>
         </div>
 
+        <!-- PAGE: SERMONS -->
         <div id="page-sermons" class="page-section hidden bg-white min-h-screen">
-            <section class="bg-white py-24 text-center border-b border-brand-neutral/30 shadow-sm px-4 reveal-fade relative overflow-hidden">
+            <section class="bg-white py-24 text-center border-b border-brand-neutral/30 shadow-sm px-4 animate-fade-in relative overflow-hidden">
                 <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#dad7d2_1px,transparent_1px)] [background-size:20px_20px]"></div>
                 <div class="relative z-10">
-                    <h1 class="text-4xl md:text-5xl font-extrabold text-slate-800 mb-4 tracking-tight uppercase reveal-up">
+                    <h1 class="text-4xl md:text-5xl font-extrabold text-slate-800 mb-4 tracking-tight uppercase">
                         SERMON <span class="text-brand-primary font-light ml-2">ARCHIVE</span>
                     </h1>
-                    <div class="h-1 w-20 bg-brand-secondary mx-auto mt-6 rounded-full mb-8 reveal-up stagger-1"></div>
-                    <p class="text-lg text-slate-600 font-light max-w-4xl mx-auto leading-relaxed reveal-up stagger-2">Catch up on past messages and explore our library of biblical teachings.</p>
+                    <div class="h-1 w-20 bg-brand-secondary mx-auto mt-6 rounded-full mb-8"></div>
+                    <p class="text-lg text-slate-600 font-light max-w-4xl mx-auto leading-relaxed animate-fade-in-up stagger-1">Catch up on past messages and explore our library of biblical teachings.</p>
                 </div>
             </section>
 
             <section class="py-24 px-4 max-w-7xl mx-auto">
-                <div class="grid md:grid-cols-3 gap-10">
+                <div class="grid md:grid-cols-2 gap-10">
                     
-                    <div class="bg-brand-neutral/5 rounded-3xl overflow-hidden shadow-lg border border-brand-neutral/30 group hover:-translate-y-2 hover:shadow-2xl transition-all duration-500 reveal-up stagger-1">
-                        <div class="relative h-56 bg-brand-dark overflow-hidden cursor-pointer" onclick="openVideoModal('C3vvk5F7Efc?start=6792&end=11220')">
-                            <img src="https://img.youtube.com/vi/C3vvk5F7Efc/hqdefault.jpg" alt="Sermon Thumbnail" class="w-full h-full object-cover opacity-60 group-hover:opacity-40 transition-opacity duration-500"/>
-                            <div class="absolute inset-0 flex items-center justify-center">
-                                <i data-lucide="play-circle" class="text-white opacity-90 group-hover:scale-125 group-hover:text-brand-accent transition-all duration-500 drop-shadow-lg" width="64" height="64" stroke-width="1.5"></i>
-                            </div>
+                    <!-- Sermon 1: Dr. Clarence Duff -->
+                    <div class="bg-brand-neutral/5 flex flex-col rounded-3xl overflow-hidden shadow-lg border border-brand-neutral/30 group hover:-translate-y-2 hover:shadow-2xl transition-all duration-500 animate-fade-in-up stagger-1">
+                        <div class="relative w-full overflow-hidden bg-black aspect-video">
+                            <!-- 1:53:12 is 6792 seconds, 3:07:00 is 11220 seconds -->
+                            <iframe class="absolute top-0 left-0 w-full h-full border-0" src="https://www.youtube.com/embed/C3vvk5F7Efc?start=6792&end=11220" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                         </div>
-                        <div class="p-8">
+                        <div class="p-8 flex-grow flex flex-col">
                             <div class="flex justify-between items-center mb-4 text-sm text-brand-secondary">
-                                <span class="font-semibold tracking-wide uppercase"><i data-lucide="calendar" class="inline w-4 h-4 mr-1"></i> May 16, 2026</span>
+                                <span class="font-semibold tracking-wide uppercase"><i data-lucide="mic" class="inline w-4 h-4 mr-1"></i> Dr. Clarence Duff</span>
                             </div>
                             <h3 class="text-2xl font-extrabold text-slate-800 mb-3">Your Commitment Matters</h3>
-                            <p class="text-brand-primary font-medium mb-6"><i data-lucide="user" class="inline w-4 h-4 mr-1"></i> Dr. Clarence Duff</p>
-                            <button onclick="openVideoModal('C3vvk5F7Efc?start=6792&end=11220')" class="w-full bg-brand-primary hover:bg-brand-dark text-white font-semibold py-3 rounded-xl transition-colors duration-300 shadow-md">Watch Sermon</button>
+                            <p class="text-slate-600 font-light flex-grow">Join Dr. Clarence Duff as he explores the importance of commitment to faith and community in our spiritual journey.</p>
                         </div>
                     </div>
 
-                    <div class="bg-brand-neutral/5 rounded-3xl overflow-hidden shadow-lg border border-brand-neutral/30 group hover:-translate-y-2 hover:shadow-2xl transition-all duration-500 reveal-up stagger-2">
-                        <div class="relative h-56 bg-brand-dark overflow-hidden cursor-pointer" onclick="openVideoModal('7nGHLxSTNU4?start=5900&end=8775')">
-                            <img src="https://img.youtube.com/vi/7nGHLxSTNU4/hqdefault.jpg" alt="Sermon Thumbnail" class="w-full h-full object-cover opacity-60 group-hover:opacity-40 transition-opacity duration-500"/>
-                            <div class="absolute inset-0 flex items-center justify-center">
-                                <i data-lucide="play-circle" class="text-white opacity-90 group-hover:scale-125 group-hover:text-brand-accent transition-all duration-500 drop-shadow-lg" width="64" height="64" stroke-width="1.5"></i>
-                            </div>
+                    <!-- Sermon 2: Pastor David Brown -->
+                    <div class="bg-brand-neutral/5 flex flex-col rounded-3xl overflow-hidden shadow-lg border border-brand-neutral/30 group hover:-translate-y-2 hover:shadow-2xl transition-all duration-500 animate-fade-in-up stagger-2">
+                        <div class="relative w-full overflow-hidden bg-black aspect-video">
+                            <!-- 1:38:20 is 5900 seconds, 2:26:15 is 8775 seconds -->
+                            <iframe class="absolute top-0 left-0 w-full h-full border-0" src="https://www.youtube.com/embed/7nGHLxSTNU4?start=5900&end=8775" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                         </div>
-                        <div class="p-8">
+                        <div class="p-8 flex-grow flex flex-col">
                             <div class="flex justify-between items-center mb-4 text-sm text-brand-secondary">
-                                <span class="font-semibold tracking-wide uppercase"><i data-lucide="calendar" class="inline w-4 h-4 mr-1"></i> May 9, 2026</span>
+                                <span class="font-semibold tracking-wide uppercase"><i data-lucide="mic" class="inline w-4 h-4 mr-1"></i> Pastor David Brown</span>
                             </div>
                             <h3 class="text-2xl font-extrabold text-slate-800 mb-3">God's Sure Promises</h3>
-                            <p class="text-brand-primary font-medium mb-6"><i data-lucide="user" class="inline w-4 h-4 mr-1"></i> Pastor David Brown</p>
-                            <button onclick="openVideoModal('7nGHLxSTNU4?start=5900&end=8775')" class="w-full bg-brand-primary hover:bg-brand-dark text-white font-semibold py-3 rounded-xl transition-colors duration-300 shadow-md">Watch Sermon</button>
+                            <p class="text-slate-600 font-light flex-grow">Pastor David Brown brings an encouraging word on relying on the steadfast and sure promises of God through any season.</p>
                         </div>
                     </div>
 
-                    <div class="bg-brand-neutral/5 rounded-3xl overflow-hidden shadow-lg border border-brand-neutral/30 group hover:-translate-y-2 hover:shadow-2xl transition-all duration-500 reveal-up stagger-3">
-                        <div class="relative h-56 bg-brand-dark overflow-hidden cursor-pointer" onclick="openVideoModal('LCytCMNhaNM?start=7653&end=11951')">
-                            <img src="https://img.youtube.com/vi/LCytCMNhaNM/hqdefault.jpg" alt="Sermon Thumbnail" class="w-full h-full object-cover opacity-60 group-hover:opacity-40 transition-opacity duration-500"/>
-                            <div class="absolute inset-0 flex items-center justify-center">
-                                <i data-lucide="play-circle" class="text-white opacity-90 group-hover:scale-125 group-hover:text-brand-accent transition-all duration-500 drop-shadow-lg" width="64" height="64" stroke-width="1.5"></i>
-                            </div>
+                    <!-- Sermon 3: Pastor Hibbert Hamilton -->
+                    <div class="bg-brand-neutral/5 flex flex-col rounded-3xl overflow-hidden shadow-lg border border-brand-neutral/30 group hover:-translate-y-2 hover:shadow-2xl transition-all duration-500 animate-fade-in-up stagger-3">
+                        <div class="relative w-full overflow-hidden bg-black aspect-video">
+                            <!-- 2:07:33 is 7653 seconds, 3:19:11 is 11951 seconds -->
+                            <iframe class="absolute top-0 left-0 w-full h-full border-0" src="https://www.youtube.com/embed/LCytCMNhaNM?start=7653&end=11951" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                         </div>
-                        <div class="p-8">
+                        <div class="p-8 flex-grow flex flex-col">
                             <div class="flex justify-between items-center mb-4 text-sm text-brand-secondary">
-                                <span class="font-semibold tracking-wide uppercase"><i data-lucide="calendar" class="inline w-4 h-4 mr-1"></i> May 2, 2026</span>
+                                <span class="font-semibold tracking-wide uppercase"><i data-lucide="mic" class="inline w-4 h-4 mr-1"></i> Pastor Hibbert Hamilton</span>
                             </div>
                             <h3 class="text-2xl font-extrabold text-slate-800 mb-3">Finishing Well</h3>
-                            <p class="text-brand-primary font-medium mb-6"><i data-lucide="user" class="inline w-4 h-4 mr-1"></i> Pastor Hibbert Hamilton</p>
-                            <button onclick="openVideoModal('LCytCMNhaNM?start=7653&end=11951')" class="w-full bg-brand-primary hover:bg-brand-dark text-white font-semibold py-3 rounded-xl transition-colors duration-300 shadow-md">Watch Sermon</button>
+                            <p class="text-slate-600 font-light flex-grow">A profound teaching from Pastor Hibbert Hamilton on the perseverance required to finish the race set before us and honor God.</p>
                         </div>
                     </div>
 
-                    <div class="bg-brand-neutral/5 rounded-3xl overflow-hidden shadow-lg border border-brand-neutral/30 group hover:-translate-y-2 hover:shadow-2xl transition-all duration-500 reveal-up stagger-4">
-                        <div class="relative h-56 bg-brand-dark overflow-hidden cursor-pointer" onclick="openVideoModal('A-VhExHWHhU?start=8548&end=12840')">
-                            <img src="https://img.youtube.com/vi/A-VhExHWHhU/hqdefault.jpg" alt="Sermon Thumbnail" class="w-full h-full object-cover opacity-60 group-hover:opacity-40 transition-opacity duration-500"/>
-                            <div class="absolute inset-0 flex items-center justify-center">
-                                <i data-lucide="play-circle" class="text-white opacity-90 group-hover:scale-125 group-hover:text-brand-accent transition-all duration-500 drop-shadow-lg" width="64" height="64" stroke-width="1.5"></i>
-                            </div>
+                    <!-- Sermon 4: Minister Michael Hall -->
+                    <div class="bg-brand-neutral/5 flex flex-col rounded-3xl overflow-hidden shadow-lg border border-brand-neutral/30 group hover:-translate-y-2 hover:shadow-2xl transition-all duration-500 animate-fade-in-up stagger-4">
+                        <div class="relative w-full overflow-hidden bg-black aspect-video">
+                            <!-- 2:22:28 is 8548 seconds, 3:34:00 is 12840 seconds -->
+                            <iframe class="absolute top-0 left-0 w-full h-full border-0" src="https://www.youtube.com/embed/A-VhExHWHhU?start=8548&end=12840" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                         </div>
-                        <div class="p-8">
+                        <div class="p-8 flex-grow flex flex-col">
                             <div class="flex justify-between items-center mb-4 text-sm text-brand-secondary">
-                                <span class="font-semibold tracking-wide uppercase"><i data-lucide="calendar" class="inline w-4 h-4 mr-1"></i> April 25, 2026</span>
+                                <span class="font-semibold tracking-wide uppercase"><i data-lucide="mic" class="inline w-4 h-4 mr-1"></i> Minister Michael Hall</span>
                             </div>
                             <h3 class="text-2xl font-extrabold text-slate-800 mb-3">The Word, The Power And The Authority</h3>
-                            <p class="text-brand-primary font-medium mb-6"><i data-lucide="user" class="inline w-4 h-4 mr-1"></i> Minister Michael Hall</p>
-                            <button onclick="openVideoModal('A-VhExHWHhU?start=8548&end=12840')" class="w-full bg-brand-primary hover:bg-brand-dark text-white font-semibold py-3 rounded-xl transition-colors duration-300 shadow-md">Watch Sermon</button>
+                            <p class="text-slate-600 font-light flex-grow">Minister Michael Hall explores the transformative power and supreme authority found within the Word of God.</p>
                         </div>
                     </div>
 
@@ -865,7 +899,26 @@
         </div>
 
         <!-- PAGE: MENS MINISTRY -->
-                <div class="space-y-12 reveal-up stagger-1">
+        <div id="page-mens" class="page-section hidden bg-white min-h-screen">
+            <!-- Custom Vibrant Hero -->
+            <section class="relative bg-brand-dark text-white py-32 px-4 overflow-hidden shadow-2xl">
+                <div class="absolute inset-0 opacity-20 bg-[url('https://images.unsplash.com/photo-1491841550275-ad7854e35ca6?auto=format&fit=crop&w=1920&q=80')] bg-cover bg-center mix-blend-overlay"></div>
+                <div class="absolute inset-0 bg-gradient-to-t from-brand-dark via-brand-dark/80 to-transparent"></div>
+                <div class="relative z-10 max-w-5xl mx-auto text-center animate-fade-in-up">
+                    <h3 class="text-brand-accent font-bold tracking-[0.3em] uppercase mb-4">Ministry</h3>
+                    <h1 class="text-5xl md:text-6xl font-extrabold mb-8 tracking-tight text-white">SHEKINAH <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-secondary to-brand-primary">MEN'S</span></h1>
+                    <div class="h-1 w-24 bg-brand-accent mx-auto rounded-full mb-8"></div>
+                    <p class="text-xl text-brand-neutral font-light max-w-3xl mx-auto leading-relaxed">
+                        The men's ministry serves a vital and necessary function in our local church. It also serves as a mechanism through which men are empowered to pursue excellence in all that they do and to become all that God intended them to be in the families, careers, leadership roles, and ministries.
+                    </p>
+                    <p class="text-lg text-brand-secondary font-light max-w-2xl mx-auto mt-6 italic">
+                        The ministry is not limited to men in our local body but seeks to reach out to the wider community of men to bring meaning, purpose, direction, hope, and wholeness in Christ.
+                    </p>
+                </div>
+            </section>
+
+            <section class="py-24 px-4 max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
+                <div class="space-y-12 animate-fade-in-up stagger-1">
                     <div class="bg-white p-8 md:p-10 rounded-3xl shadow-xl shadow-brand-neutral/50 border-l-4 border-brand-accent hover:-translate-y-2 transition-transform duration-500">
                         <h2 class="text-3xl font-extrabold text-slate-800 mb-4 flex items-center gap-4">
                             <i data-lucide="shield" class="text-brand-accent" width="32" height="32"></i> OUR VISION
@@ -883,13 +936,13 @@
                         </p>
                     </div>
                 </div>
-                <div class="hidden md:block reveal-up stagger-2 rounded-[2.5rem] overflow-hidden shadow-2xl h-[700px]">
+                <div class="hidden md:block animate-fade-in-up stagger-2 rounded-[2.5rem] overflow-hidden shadow-2xl h-[700px]">
                     <img src="https://images.unsplash.com/photo-1529070538774-1843cb3265df?auto=format&fit=crop&w=1000&q=80" alt="Men's Fellowship" class="w-full h-full object-cover hover:scale-105 transition duration-1000"/>
                 </div>
             </section>
 
             <section class="bg-brand-neutral/10 py-24 px-4 border-t border-brand-neutral/30">
-                <div class="max-w-5xl mx-auto bg-white rounded-[3rem] p-10 md:p-16 shadow-2xl border border-brand-neutral/20 reveal-up stagger-3">
+                <div class="max-w-5xl mx-auto bg-white rounded-[3rem] p-10 md:p-16 shadow-2xl border border-brand-neutral/20 animate-fade-in-up stagger-3">
                     <div class="text-center mb-12">
                         <h2 class="text-3xl md:text-4xl font-extrabold text-slate-800 mb-4">
                             GROWTH <span class="text-brand-secondary font-light">AND DEVELOPMENT</span>
@@ -940,13 +993,14 @@
             </section>
         </div>
 
+        <!-- PAGE: WOMEN'S MINISTRY -->
         <div id="page-womens" class="page-section hidden bg-white min-h-screen">
             <section class="relative bg-gradient-to-br from-brand-neutral via-white to-brand-neutral/30 py-32 px-4 overflow-hidden border-b border-brand-neutral/50">
                 <div class="absolute top-0 left-0 w-full h-full overflow-hidden z-0 opacity-40 pointer-events-none">
                     <div class="absolute -top-24 -left-24 w-96 h-96 rounded-full bg-brand-secondary/30 blur-3xl"></div>
                     <div class="absolute bottom-0 right-0 w-[30rem] h-[30rem] rounded-full bg-brand-primary/10 blur-3xl"></div>
                 </div>
-                <div class="relative z-10 max-w-5xl mx-auto text-center reveal-up">
+                <div class="relative z-10 max-w-5xl mx-auto text-center animate-fade-in-up">
                     <h3 class="text-brand-primary font-bold tracking-[0.3em] uppercase mb-4">Women's Ministry</h3>
                     <h1 class="text-5xl md:text-6xl font-extrabold text-slate-800 mb-8 tracking-tight">
                         WOMEN OF <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-primary to-brand-secondary">ESSENCE</span>
@@ -959,10 +1013,10 @@
             </section>
 
             <section class="py-24 px-4 max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center relative">
-                <div class="hidden md:block reveal-up stagger-1 rounded-[3rem] overflow-hidden shadow-2xl h-[700px] border-4 border-white">
+                <div class="hidden md:block animate-fade-in-up stagger-1 rounded-[3rem] overflow-hidden shadow-2xl h-[700px] border-4 border-white">
                     <img src="https://images.unsplash.com/photo-1490730141103-6cac27aaab94?auto=format&fit=crop&w=1000&q=80" alt="Women's Fellowship Bible" class="w-full h-full object-cover hover:scale-105 transition duration-1000"/>
                 </div>
-                <div class="space-y-10 reveal-up stagger-2">
+                <div class="space-y-10 animate-fade-in-up stagger-2">
                     <div class="bg-white p-10 rounded-[2.5rem] shadow-xl shadow-brand-neutral/50 border border-brand-neutral/20 hover:shadow-2xl hover:shadow-brand-secondary/20 transition-shadow duration-500">
                         <h2 class="text-3xl font-extrabold text-slate-800 mb-4 flex items-center gap-4">
                             <i data-lucide="sparkles" class="text-brand-accent" width="32" height="32"></i> OUR VISION
@@ -983,7 +1037,7 @@
             </section>
 
             <section class="bg-gradient-to-r from-brand-primary to-brand-secondary py-24 px-4 text-white">
-                <div class="max-w-4xl mx-auto text-center reveal-up stagger-3">
+                <div class="max-w-4xl mx-auto text-center animate-fade-in-up stagger-3">
                     <div class="bg-white/10 backdrop-blur-md border border-white/20 p-12 rounded-[3rem] shadow-2xl">
                         <i data-lucide="star" class="mx-auto text-brand-neutral mb-6" width="48" height="48"></i>
                         <h2 class="text-3xl md:text-4xl font-extrabold mb-8 tracking-wide">
@@ -997,6 +1051,7 @@
             </section>
         </div>
 
+        <!-- PAGE: YOUNG ADULTS MINISTRY -->
         <div id="page-young_adults" class="page-section hidden bg-white min-h-screen">
             <section class="relative bg-gradient-to-r from-brand-dark to-brand-primary text-white py-32 px-4 overflow-hidden shadow-xl">
                 <div class="absolute inset-0 opacity-10">
@@ -1004,7 +1059,7 @@
                         <polygon fill="currentColor" points="0,100 100,0 100,100"/>
                     </svg>
                 </div>
-                <div class="relative z-10 max-w-5xl mx-auto text-center reveal-up">
+                <div class="relative z-10 max-w-5xl mx-auto text-center animate-fade-in-up">
                     <h3 class="text-brand-secondary font-bold tracking-[0.3em] uppercase mb-4">Ministry</h3>
                     <h1 class="text-5xl md:text-7xl font-extrabold mb-8 tracking-tight text-white">
                         ROOTED <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-secondary to-brand-neutral">YOUNG ADULTS</span>
@@ -1025,7 +1080,7 @@
             </section>
 
             <section class="py-24 px-4 max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
-                <div class="space-y-12 reveal-up stagger-1">
+                <div class="space-y-12 animate-fade-in-up stagger-1">
                     <div class="group relative bg-white p-10 rounded-[2rem] shadow-xl border border-brand-neutral/20 hover:-translate-y-2 transition-all duration-500 overflow-hidden">
                         <div class="absolute top-0 left-0 w-2 h-full bg-brand-primary"></div>
                         <h2 class="text-3xl font-extrabold text-slate-800 mb-6 flex items-center gap-4">
@@ -1051,13 +1106,13 @@
                         </p>
                     </div>
                 </div>
-                <div class="hidden md:block h-full min-h-[600px] rounded-[3rem] overflow-hidden shadow-2xl reveal-up stagger-2 relative border border-brand-neutral">
+                <div class="hidden md:block h-full min-h-[600px] rounded-[3rem] overflow-hidden shadow-2xl animate-fade-in-up stagger-2 relative border border-brand-neutral">
                     <div class="absolute inset-0 bg-brand-primary/20 mix-blend-multiply z-10"></div>
                     <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1000&q=80" alt="Young Adults Group" class="absolute inset-0 w-full h-full object-cover hover:scale-105 transition duration-1000 z-0"/>
                 </div>
             </section>
             
-            <section class="bg-brand-neutral/10 py-24 text-center border-t border-brand-neutral/30 reveal-up stagger-3">
+            <section class="bg-brand-neutral/10 py-24 text-center border-t border-brand-neutral/30 animate-fade-in-up stagger-3">
                 <div class="max-w-5xl mx-auto px-4">
                     <div class="inline-block bg-white p-8 md:p-12 rounded-[3rem] shadow-2xl border border-brand-neutral/50 transform hover:scale-105 transition-transform duration-500">
                         <div class="flex justify-center mb-6 text-brand-primary">
@@ -1071,19 +1126,20 @@
             </section>
         </div>
 
+        <!-- PAGE: YOUTH MINISTRY -->
         <div id="page-youth" class="page-section hidden bg-white min-h-screen">
-            <section class="bg-white py-24 text-center border-b border-brand-neutral/30 shadow-sm px-4 reveal-fade relative overflow-hidden">
+            <section class="bg-white py-24 text-center border-b border-brand-neutral/30 shadow-sm px-4 animate-fade-in relative overflow-hidden">
                 <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#dad7d2_1px,transparent_1px)] [background-size:20px_20px]"></div>
                 <div class="relative z-10">
-                    <h1 class="text-4xl md:text-5xl font-extrabold text-slate-800 mb-4 tracking-tight uppercase reveal-up">
+                    <h1 class="text-4xl md:text-5xl font-extrabold text-slate-800 mb-4 tracking-tight uppercase">
                         REDEEMED YOUTH <span class="text-brand-primary font-light ml-2">MINISTRY</span>
                     </h1>
-                    <div class="h-1 w-20 bg-brand-secondary mx-auto mt-6 rounded-full mb-8 reveal-up stagger-1"></div>
-                    <p class="text-lg text-slate-600 font-light max-w-4xl mx-auto leading-relaxed reveal-up stagger-2">(R.Y.M)</p>
+                    <div class="h-1 w-20 bg-brand-secondary mx-auto mt-6 rounded-full mb-8"></div>
+                    <p class="text-lg text-slate-600 font-light max-w-4xl mx-auto leading-relaxed animate-fade-in-up stagger-1">(R.Y.M)</p>
                 </div>
             </section>
             
-            <section class="max-w-7xl mx-auto grid md:grid-cols-2 reveal-up stagger-1 mt-12 mb-12 shadow-2xl overflow-hidden rounded-3xl border border-brand-neutral/30 mx-4">
+            <section class="max-w-7xl mx-auto grid md:grid-cols-2 animate-fade-in-up stagger-1 mt-12 mb-12 shadow-2xl overflow-hidden rounded-3xl border border-brand-neutral/30 mx-4">
                 <div class="h-80 md:h-auto relative">
                     <img src="https://images.pexels.com/photos/3184339/pexels-photo-3184339.jpeg?auto=compress&cs=tinysrgb&w=1000" alt="Youth Worship" class="absolute inset-0 w-full h-full object-cover" />
                     <div class="absolute inset-0 bg-brand-primary/20 mix-blend-overlay"></div>
@@ -1095,15 +1151,15 @@
                 </div>
             </section>
 
-            <section class="bg-brand-primary text-white py-16 text-center reveal-up stagger-2 border-y border-brand-dark/20 shadow-inner">
+            <section class="bg-brand-primary text-white py-16 text-center animate-fade-in-up stagger-2 border-y border-brand-dark/20 shadow-inner">
                 <div class="max-w-5xl mx-auto px-4">
                     <h2 class="text-2xl md:text-4xl font-extrabold tracking-wider uppercase drop-shadow-md">
-                        JOIN IN – BE IMPACTED – BUILD YOUR FAITH – WALK WITH GOD
+                        JOIN IN &ndash; BE IMPACTED &ndash; BUILD YOUR FAITH &ndash; WALK WITH GOD
                     </h2>
                 </div>
             </section>
             
-            <section class="py-24 px-4 bg-white text-center reveal-up stagger-3">
+            <section class="py-24 px-4 bg-white text-center animate-fade-in-up stagger-3">
                 <div class="max-w-5xl mx-auto">
                     <h2 class="text-4xl font-extrabold text-slate-800 mb-12 uppercase tracking-tight">TESTIMONIALS</h2>
                     
@@ -1124,7 +1180,7 @@
                 </div>
             </section>
 
-            <section class="grid grid-cols-1 md:grid-cols-3 reveal-up stagger-4 bg-brand-dark border-t border-brand-dark">
+            <section class="grid grid-cols-1 md:grid-cols-3 animate-fade-in-up stagger-4 bg-brand-dark border-t border-brand-dark">
                 <img src="https://images.unsplash.com/photo-1529390079861-591de354faf5?auto=format&fit=crop&w=800&q=80" alt="Youth Group" class="w-full h-72 object-cover hover:scale-105 transition duration-500 cursor-pointer opacity-90 hover:opacity-100"/>
                 <img src="https://images.unsplash.com/photo-1502086223501-7ea6ecd79368?auto=format&fit=crop&w=800&q=80" alt="Youth Activity" class="w-full h-72 object-cover hover:scale-105 transition duration-500 cursor-pointer opacity-90 hover:opacity-100"/>
                 <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=800&q=80" alt="Youth Discussion" class="w-full h-72 object-cover hover:scale-105 transition duration-500 cursor-pointer opacity-90 hover:opacity-100"/>
@@ -1134,22 +1190,23 @@
             </section>
         </div>
 
+        <!-- PAGE: EDUCATION MINISTRY -->
         <div id="page-education" class="page-section hidden bg-white min-h-screen">
-            <section class="bg-white py-24 text-center border-b border-brand-neutral/30 shadow-sm px-4 reveal-fade relative overflow-hidden">
+            <section class="bg-white py-24 text-center border-b border-brand-neutral/30 shadow-sm px-4 animate-fade-in relative overflow-hidden">
                 <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#dad7d2_1px,transparent_1px)] [background-size:20px_20px]"></div>
                 <div class="relative z-10">
-                    <h1 class="text-4xl md:text-5xl font-extrabold text-slate-800 mb-4 tracking-tight uppercase reveal-up">
+                    <h1 class="text-4xl md:text-5xl font-extrabold text-slate-800 mb-4 tracking-tight uppercase">
                         CHRISTIAN EDUCATION MINISTRY <span class="text-brand-primary font-light ml-2">(C.E.M)</span>
                     </h1>
-                    <div class="h-1 w-20 bg-brand-secondary mx-auto mt-6 rounded-full mb-8 reveal-up stagger-1"></div>
+                    <div class="h-1 w-20 bg-brand-secondary mx-auto mt-6 rounded-full mb-8"></div>
                 </div>
             </section>
 
             <section class="py-24 px-4 max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
-                <div class="hidden md:block reveal-up stagger-1 rounded-3xl overflow-hidden shadow-2xl border border-brand-neutral">
+                <div class="hidden md:block animate-fade-in-up stagger-1 rounded-3xl overflow-hidden shadow-2xl border border-brand-neutral">
                     <img src="https://images.unsplash.com/photo-1504052434569-70ad5836ab65?auto=format&fit=crop&w=1000&q=80" alt="Bible Open" class="w-full h-[500px] object-cover grayscale-[10%] hover:scale-105 transition duration-700"/>
                 </div>
-                <div class="space-y-12 reveal-up stagger-2">
+                <div class="space-y-12 animate-fade-in-up stagger-2">
                     <div class="group hover:bg-brand-neutral/10 p-6 -m-6 rounded-2xl transition-colors duration-300">
                         <h2 class="text-3xl font-extrabold text-slate-800 mb-6 tracking-wide flex items-center gap-3">
                             OUR <span class="text-brand-primary font-light">VISION</span>
@@ -1171,7 +1228,7 @@
 
             <section class="bg-brand-neutral/10 py-24 px-4 border-y border-brand-neutral/30">
                 <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-16 items-center">
-                    <div class="reveal-up stagger-3">
+                    <div class="animate-fade-in-up stagger-3">
                         <h2 class="text-3xl font-extrabold text-slate-800 mb-10 tracking-wide">
                             FIVE <span class="text-brand-primary font-light">CORE</span> FOCUSES
                         </h2>
@@ -1204,13 +1261,13 @@
                             
                         </ul>
                     </div>
-                    <div class="hidden md:block reveal-up stagger-4 rounded-3xl overflow-hidden shadow-2xl border border-brand-neutral">
+                    <div class="hidden md:block animate-fade-in-up stagger-4 rounded-3xl overflow-hidden shadow-2xl border border-brand-neutral">
                         <img src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=1000&q=80" alt="Community" class="w-full h-[400px] object-cover grayscale-[10%] hover:scale-105 transition duration-700"/>
                     </div>
                 </div>
             </section>
 
-            <section class="py-32 px-4 bg-white reveal-up stagger-1">
+            <section class="py-32 px-4 bg-white animate-fade-in-up stagger-1">
                 <div class="max-w-6xl mx-auto text-center">
                     <h2 class="text-3xl font-extrabold text-slate-800 mb-8 tracking-wide">
                         THE CURRICULUM <span class="text-brand-primary font-light">CONTINUUM</span>
@@ -1268,6 +1325,7 @@
             </section>
         </div>
         
+        <!-- PAGE: CHILDREN'S MINISTRY -->
         <div id="page-children" class="page-section hidden bg-white min-h-screen">
             <section class="relative bg-brand-primary text-white py-32 px-4 overflow-hidden shadow-2xl">
                 <div class="absolute inset-0 overflow-hidden pointer-events-none opacity-20">
@@ -1275,7 +1333,7 @@
                     <div class="absolute bottom-10 right-10 w-96 h-96 rounded-full bg-brand-secondary blur-3xl"></div>
                 </div>
                 
-                <div class="relative z-10 max-w-5xl mx-auto text-center reveal-up">
+                <div class="relative z-10 max-w-5xl mx-auto text-center animate-fade-in-up">
                     <h3 class="text-brand-accent font-bold tracking-[0.3em] uppercase mb-4">Children's Ministry</h3>
                     <h1 class="text-5xl md:text-7xl font-extrabold mb-6 tracking-tight text-white">
                         MIGHTY WARRIORS <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-accent to-yellow-200">FOR CHRIST</span>
@@ -1294,7 +1352,7 @@
             </section>
 
             <section class="py-24 px-4 max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
-                <div class="space-y-12 reveal-up stagger-1">
+                <div class="space-y-12 animate-fade-in-up stagger-1">
                     <div class="group relative bg-white p-10 rounded-[2rem] shadow-xl border border-brand-neutral/30 hover:-translate-y-2 transition-all duration-500 overflow-hidden">
                         <div class="absolute top-0 left-0 w-2 h-full bg-brand-secondary"></div>
                         <h2 class="text-3xl font-extrabold text-slate-800 mb-6 flex items-center gap-4">
@@ -1323,14 +1381,14 @@
                         </p>
                     </div>
                 </div>
-                <div class="hidden md:block h-full min-h-[600px] rounded-[3rem] overflow-hidden shadow-2xl reveal-up stagger-2 border-4 border-brand-neutral">
+                <div class="hidden md:block h-full min-h-[600px] rounded-[3rem] overflow-hidden shadow-2xl animate-fade-in-up stagger-2 border-4 border-brand-neutral">
                     <img src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=1000&q=80" alt="Children's Ministry" class="w-full h-full object-cover hover:scale-105 transition duration-1000"/>
                 </div>
             </section>
             
             <section class="bg-brand-neutral/10 py-24 px-4 border-t border-brand-neutral/30">
                 <div class="max-w-6xl mx-auto">
-                    <div class="text-center mb-16 reveal-up stagger-2">
+                    <div class="text-center mb-16 animate-fade-in-up stagger-2">
                         <h2 class="text-4xl md:text-5xl font-extrabold text-slate-800 mb-6 tracking-tight">
                             THE <span class="text-brand-primary">MIGHTY WARRIORS</span> FOR CHRIST
                         </h2>
@@ -1343,7 +1401,7 @@
                         </p>
                     </div>
                     
-                    <div class="reveal-up stagger-3">
+                    <div class="animate-fade-in-up stagger-3">
                         <h3 class="text-3xl font-extrabold text-center text-slate-800 mb-12">OUR GOALS:</h3>
                         <div class="grid md:grid-cols-2 gap-8">
                             
@@ -1355,7 +1413,7 @@
                                     <h4 class="text-xl font-bold text-slate-800">Social Skills development</h4>
                                 </div>
                                 <p class="text-slate-600 font-light leading-relaxed">
-                                    We work to achieve this through planned and spontaneous social experiences. We develop group activities that will involve them to listen to others' thoughts and generate ideas together as well as taking them on outings, camps and field trips to encourage them to communicate on a casual level and share their learning experiences with one another.
+                                    We work to achieve this through planned and spontaneous social experiences. We develop group activities that will involve them to listen to others&#039; thoughts and generate ideas together as well as taking them on outings, camps and field trips to encourage them to communicate on a casual level and share their learning experiences with one another.
                                 </p>
                             </div>
                             
@@ -1367,7 +1425,7 @@
                                     <h4 class="text-xl font-bold text-slate-800">Personal Skills Development</h4>
                                 </div>
                                 <p class="text-slate-600 font-light leading-relaxed">
-                                    We strive to achieve this by providing opportunities for children to give presentations and encourage them to praise one another. An environment is created which encourage and foster a sense of belonging and safety in our children. At the end of each year children are presented with certificates for outstanding achievements in areas such as "big helper" or any areas they have made improvements.
+                                    We strive to achieve this by providing opportunities for children to give presentations and encourage them to praise one another. An environment is created which encourage and foster a sense of belonging and safety in our children. At the end of each year children are presented with certificates for outstanding achievements in areas such as &quot;big helper&quot; or any areas they have made improvements.
                                 </p>
                             </div>
                             
@@ -1403,7 +1461,7 @@
                                     <h4 class="text-xl font-bold text-slate-800">Emotional</h4>
                                 </div>
                                 <p class="text-slate-600 font-light leading-relaxed">
-                                    Emotions are very important to the development of a child. We strive to provide the teaching and activities through which children can begin to recognize and use their emotions in creative and productive ways. It is also our goal to help children understand that others' have feelings through activities and conflict resolutions.
+                                    Emotions are very important to the development of a child. We strive to provide the teaching and activities through which children can begin to recognize and use their emotions in creative and productive ways. It is also our goal to help children understand that others&#039; have feelings through activities and conflict resolutions.
                                 </p>
                             </div>
                             
@@ -1425,11 +1483,12 @@
             </section>
         </div>
 
+        <!-- PAGE: SENIORS MINISTRY -->
         <div id="page-seniors" class="page-section hidden bg-white min-h-screen">
             <section class="relative bg-brand-neutral text-slate-800 py-32 px-4 overflow-hidden shadow-2xl border-b border-brand-neutral/50">
                 <div class="absolute inset-0 opacity-20 bg-[url('https://images.unsplash.com/photo-1533222481259-ce20eda1e20b?auto=format&fit=crop&w=1920&q=80')] bg-cover bg-center"></div>
                 <div class="absolute inset-0 bg-gradient-to-t from-brand-neutral via-brand-neutral/80 to-transparent"></div>
-                <div class="relative z-10 max-w-5xl mx-auto text-center reveal-up">
+                <div class="relative z-10 max-w-5xl mx-auto text-center animate-fade-in-up">
                     <h3 class="text-brand-primary font-bold tracking-[0.3em] uppercase mb-4">Seniors Ministry</h3>
                     <h1 class="text-5xl md:text-6xl font-extrabold mb-4 tracking-tight text-brand-dark">
                         GOLDEN ESSENCE <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-primary to-brand-secondary">MINISTERING SENIORS</span>
@@ -1440,7 +1499,7 @@
             </section>
 
             <section class="py-24 px-4 max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
-                <div class="space-y-12 reveal-up stagger-1">
+                <div class="space-y-12 animate-fade-in-up stagger-1">
                     <div class="bg-white p-8 md:p-10 rounded-3xl shadow-xl shadow-brand-neutral/50 border-l-4 border-brand-accent hover:-translate-y-2 transition-transform duration-500">
                         <h2 class="text-3xl font-extrabold text-slate-800 mb-4 flex items-center gap-4">
                             <i data-lucide="sun" class="text-brand-accent" width="32" height="32"></i> OUR VISION
@@ -1458,17 +1517,17 @@
                         </p>
                     </div>
                 </div>
-                <div class="hidden md:block reveal-up stagger-2 rounded-[2.5rem] overflow-hidden shadow-2xl h-[600px] border border-brand-neutral/50">
+                <div class="hidden md:block animate-fade-in-up stagger-2 rounded-[2.5rem] overflow-hidden shadow-2xl h-[600px] border border-brand-neutral/50">
                     <img src="https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=1000&q=80" alt="Seniors Connecting" class="w-full h-full object-cover hover:scale-105 transition duration-1000 grayscale-[20%]"/>
                 </div>
             </section>
 
             <section class="bg-brand-neutral/10 py-24 px-4 border-t border-brand-neutral/30">
                 <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-16 items-center">
-                    <div class="order-2 md:order-1 hidden md:block reveal-up stagger-3 rounded-[3rem] overflow-hidden shadow-2xl h-[500px] border border-brand-neutral">
+                    <div class="order-2 md:order-1 hidden md:block animate-fade-in-up stagger-3 rounded-[3rem] overflow-hidden shadow-2xl h-[500px] border border-brand-neutral">
                         <img src="https://images.unsplash.com/photo-1473186578172-c141e6798c85?auto=format&fit=crop&w=800&q=80" alt="Maximizing Potential" class="w-full h-full object-cover hover:scale-105 transition duration-1000"/>
                     </div>
-                    <div class="order-1 md:order-2 reveal-up stagger-4">
+                    <div class="order-1 md:order-2 animate-fade-in-up stagger-4">
                         <h2 class="text-3xl md:text-4xl font-extrabold text-slate-800 mb-6">
                             MAXIMIZING <span class="text-brand-primary font-light">OUR POTENTIAL</span>
                         </h2>
@@ -1487,7 +1546,7 @@
                 </div>
             </section>
 
-            <section class="bg-brand-dark text-white py-20 text-center reveal-up stagger-1">
+            <section class="bg-brand-dark text-white py-20 text-center animate-fade-in-up stagger-1">
                 <div class="max-w-5xl mx-auto px-4">
                     <h2 class="text-3xl md:text-5xl font-extrabold tracking-tight mb-6 text-brand-neutral">
                         SENIORS CONNECTING WITH EACH OTHER
@@ -1498,7 +1557,7 @@
                 </div>
             </section>
             
-            <section class="py-24 px-4 bg-white text-center reveal-up stagger-2">
+            <section class="py-24 px-4 bg-white text-center animate-fade-in-up stagger-2">
                 <div class="max-w-4xl mx-auto">
                     <h3 class="text-2xl font-bold tracking-[0.2em] text-brand-secondary mb-10 uppercase">GIVE MORE</h3>
                     <div class="relative">
@@ -1513,36 +1572,38 @@
             </section>
         </div>
 
+        <!-- PAGE: HOSPITALITY -->
         <div id="page-hospitality" class="page-section hidden bg-white min-h-screen">
-            <section class="bg-white py-24 text-center border-b border-brand-neutral/30 shadow-sm px-4 reveal-fade relative overflow-hidden">
+            <section class="bg-white py-24 text-center border-b border-brand-neutral/30 shadow-sm px-4 animate-fade-in relative overflow-hidden">
                 <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#dad7d2_1px,transparent_1px)] [background-size:20px_20px]"></div>
                 <div class="relative z-10">
-                    <h1 class="text-4xl md:text-5xl font-extrabold text-slate-800 mb-4 tracking-tight uppercase reveal-up">
+                    <h1 class="text-4xl md:text-5xl font-extrabold text-slate-800 mb-4 tracking-tight uppercase">
                         HOSPITALITY <span class="text-brand-primary font-light ml-2">MINISTRY</span>
                     </h1>
-                    <div class="h-1 w-20 bg-brand-secondary mx-auto mt-6 rounded-full mb-8 reveal-up stagger-1"></div>
-                    <p class="text-lg text-slate-600 font-light max-w-4xl mx-auto leading-relaxed reveal-up stagger-2">The Hospitality Ministry provides a warm, nurturing environment for our members and guests to create experiences that reflects the love of God.<br/><br/>Our hospitality team will welcome you into our warm and friendly environment. Our team is passionate about displaying God's love through service. "Be hospitable to one another without grumbling. As each one received a gift, minister it to one another, as good stewards of the manifold grace of God." 1 peter 4:9-10.<br/><br/>Our ministry includes Ushers, Greeters, Parking attendants and a Culinary team. We believe that a warm, welcoming attitude is the first step to building fellowship and meaningful relationships within our church and community. Fellowship meal is important to us, therefore, our Culinary team coordinates food services to align with the overall goals of the church throughout the year.</p>
+                    <div class="h-1 w-20 bg-brand-secondary mx-auto mt-6 rounded-full mb-8"></div>
+                    <p class="text-lg text-slate-600 font-light max-w-4xl mx-auto leading-relaxed animate-fade-in-up stagger-1">The Hospitality Ministry provides a warm, nurturing environment for our members and guests to create experiences that reflects the love of God.<br/><br/>Our hospitality team will welcome you into our warm and friendly environment. Our team is passionate about displaying God's love through service. "Be hospitable to one another without grumbling. As each one received a gift, minister it to one another, as good stewards of the manifold grace of God." 1 peter 4:9-10.<br/><br/>Our ministry includes Ushers, Greeters, Parking attendants and a Culinary team. We believe that a warm, welcoming attitude is the first step to building fellowship and meaningful relationships within our church and community. Fellowship meal is important to us, therefore, our Culinary team coordinates food services to align with the overall goals of the church throughout the year.</p>
                 </div>
             </section>
             
-            <section class="h-[500px] w-full reveal-up stagger-2 overflow-hidden border-t border-brand-neutral/30">
+            <section class="h-[500px] w-full animate-fade-in-up stagger-2 overflow-hidden border-t border-brand-neutral/30">
                 <img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=1920&q=80" alt="Hospitality Event" class="w-full h-full object-cover grayscale-[30%] hover:scale-105 hover:grayscale-0 transition-all duration-1000"/>
             </section>
         </div>
 
+        <!-- PAGE: UMBRELLA OF HOPE -->
         <div id="page-umbrella_of_hope" class="page-section hidden bg-white min-h-screen">
-            <section class="bg-white py-24 text-center border-b border-brand-neutral/30 shadow-sm px-4 reveal-fade relative overflow-hidden">
+            <section class="bg-white py-24 text-center border-b border-brand-neutral/30 shadow-sm px-4 animate-fade-in relative overflow-hidden">
                 <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#dad7d2_1px,transparent_1px)] [background-size:20px_20px]"></div>
                 <div class="relative z-10">
-                    <h1 class="text-4xl md:text-5xl font-extrabold text-slate-800 mb-4 tracking-tight uppercase reveal-up">
+                    <h1 class="text-4xl md:text-5xl font-extrabold text-slate-800 mb-4 tracking-tight uppercase">
                         UMBRELLA OF HOPE HELP <span class="text-brand-primary font-light ml-2">MINISTRY</span>
                     </h1>
-                    <div class="h-1 w-20 bg-brand-secondary mx-auto mt-6 rounded-full mb-8 reveal-up stagger-1"></div>
-                    <p class="text-lg text-slate-600 font-light max-w-4xl mx-auto leading-relaxed reveal-up stagger-2">The Umbrella of Hope through the expression of Christian love, seeks to understand the struggles of poverty, and is committed to working with families and individuals to provide help for the present and hope for the future.<br/><br/>The Umbrella of Hope is a division of the Church of God Sabbath-Keeping Ministries; it is funded by donations from community partners, corporations, individuals, and our local church.<br/><br/><span class="italic font-medium text-brand-primary">Supported by: Member of Second Harvest and Feed Ontario</span></p>
+                    <div class="h-1 w-20 bg-brand-secondary mx-auto mt-6 rounded-full mb-8"></div>
+                    <p class="text-lg text-slate-600 font-light max-w-4xl mx-auto leading-relaxed animate-fade-in-up stagger-1">The Umbrella of Hope through the expression of Christian love, seeks to understand the struggles of poverty, and is committed to working with families and individuals to provide help for the present and hope for the future.<br/><br/>The Umbrella of Hope is a division of the Church of God Sabbath-Keeping Ministries; it is funded by donations from community partners, corporations, individuals, and our local church.<br/><br/><span class="italic font-medium text-brand-primary">Supported by: Member of Second Harvest and Feed Ontario</span></p>
                 </div>
             </section>
 
-            <section class="py-24 px-4 max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center reveal-up stagger-2">
+            <section class="py-24 px-4 max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center animate-fade-in-up stagger-2">
                 <div class="space-y-12">
                     <div>
                         <h2 class="text-3xl font-extrabold text-slate-800 mb-6 tracking-wide flex items-center gap-3">
@@ -1569,14 +1630,14 @@
                 </div>
             </section>
 
-            <section class="bg-brand-dark py-20 px-4 text-center text-white reveal-up stagger-3 shadow-inner">
+            <section class="bg-brand-dark py-20 px-4 text-center text-white animate-fade-in-up stagger-3 shadow-inner">
                 <h2 class="text-4xl font-extrabold tracking-wide mb-6">DONATIONS WELCOMED</h2>
                 <p class="text-xl font-light max-w-3xl mx-auto leading-relaxed">
                     To assist us in reaching the needs of vulnerable members in our community, please call us at <span class="font-bold text-brand-neutral hover:text-white cursor-pointer transition">905-452-7264</span> or email us at <a href="mailto:umbrellaofhope@cogsabbath.org" class="font-bold text-brand-neutral hover:text-white hover:underline transition">umbrellaofhope@cogsabbath.org</a>.
                 </p>
             </section>
 
-            <section class="bg-brand-neutral/5 py-24 px-4 reveal-up stagger-4 border-t border-brand-neutral/20">
+            <section class="bg-brand-neutral/5 py-24 px-4 animate-fade-in-up stagger-4 border-t border-brand-neutral/20">
                 <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-16">
                     <div>
                         <h2 class="text-4xl font-extrabold text-slate-800 mb-12 tracking-wide">
@@ -1624,11 +1685,13 @@
             </section>
         </div>
 
+        <!-- PAGE: WORSHIP MINISTRY -->
         <div id="page-worship" class="page-section hidden bg-white min-h-screen">
+            <!-- Custom Vibrant Hero -->
             <section class="relative bg-brand-dark text-white py-32 px-4 overflow-hidden shadow-2xl border-b border-brand-neutral/50">
                 <div class="absolute inset-0 opacity-20 bg-[url('https://images.unsplash.com/photo-1510511459019-5efa370b1c9f?auto=format&fit=crop&w=1920&q=80')] bg-cover bg-center mix-blend-overlay"></div>
                 <div class="absolute inset-0 bg-gradient-to-t from-brand-dark via-brand-dark/80 to-transparent"></div>
-                <div class="relative z-10 max-w-5xl mx-auto text-center reveal-up">
+                <div class="relative z-10 max-w-5xl mx-auto text-center animate-fade-in-up">
                     <h3 class="text-brand-accent font-bold tracking-[0.3em] uppercase mb-4">Ministry</h3>
                     <h1 class="text-5xl md:text-6xl font-extrabold mb-8 tracking-tight text-white">WORSHIP <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-secondary to-brand-primary">MINISTRY</span></h1>
                     <div class="h-1 w-24 bg-brand-accent mx-auto rounded-full mb-8"></div>
@@ -1639,7 +1702,7 @@
             </section>
 
             <section class="py-24 px-4 max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
-                <div class="space-y-12 reveal-up stagger-1">
+                <div class="space-y-12 animate-fade-in-up stagger-1">
                     <div class="bg-white p-8 md:p-10 rounded-3xl shadow-xl shadow-brand-neutral/50 border-l-4 border-brand-accent hover:-translate-y-2 transition-transform duration-500">
                         <h2 class="text-3xl font-extrabold text-slate-800 mb-4 flex items-center gap-4">
                             <i data-lucide="music" class="text-brand-accent" width="32" height="32"></i> OUR VISION
@@ -1657,17 +1720,19 @@
                         </p>
                     </div>
                 </div>
-                <div class="hidden md:block reveal-up stagger-2 rounded-[2.5rem] overflow-hidden shadow-2xl h-[600px] border border-brand-neutral/50">
+                <div class="hidden md:block animate-fade-in-up stagger-2 rounded-[2.5rem] overflow-hidden shadow-2xl h-[600px] border border-brand-neutral/50">
                     <img src="https://images.unsplash.com/photo-1516280440502-86105c31275d?auto=format&fit=crop&w=1000&q=80" alt="Worship Team" class="w-full h-full object-cover hover:scale-105 transition duration-1000 grayscale-[10%]"/>
                 </div>
             </section>
         </div>
 
+        <!-- PAGE: PERFORMING ARTS MINISTRY -->
         <div id="page-performing_arts" class="page-section hidden bg-white min-h-screen">
+            <!-- Custom Vibrant Hero -->
             <section class="relative bg-brand-primary text-white py-32 px-4 overflow-hidden shadow-2xl border-b border-brand-neutral/50">
                 <div class="absolute inset-0 opacity-20 bg-[url('https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=1920&q=80')] bg-cover bg-center mix-blend-overlay"></div>
                 <div class="absolute inset-0 bg-gradient-to-t from-brand-primary via-brand-primary/80 to-transparent"></div>
-                <div class="relative z-10 max-w-5xl mx-auto text-center reveal-up">
+                <div class="relative z-10 max-w-5xl mx-auto text-center animate-fade-in-up">
                     <h3 class="text-brand-accent font-bold tracking-[0.3em] uppercase mb-4">Ministry</h3>
                     <h1 class="text-5xl md:text-6xl font-extrabold mb-4 tracking-tight text-white">
                         PERFORMING <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-accent to-yellow-200">ARTS</span>
@@ -1680,10 +1745,10 @@
             </section>
 
             <section class="py-24 px-4 max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
-                <div class="hidden md:block reveal-up stagger-1 rounded-[2.5rem] overflow-hidden shadow-2xl h-[600px] border border-brand-neutral/50">
+                <div class="hidden md:block animate-fade-in-up stagger-1 rounded-[2.5rem] overflow-hidden shadow-2xl h-[600px] border border-brand-neutral/50">
                     <img src="https://images.unsplash.com/photo-1460723237483-7a6dc9d0b212?auto=format&fit=crop&w=1000&q=80" alt="Performing Arts" class="w-full h-full object-cover hover:scale-105 transition duration-1000 grayscale-[10%]"/>
                 </div>
-                <div class="space-y-12 reveal-up stagger-2">
+                <div class="space-y-12 animate-fade-in-up stagger-2">
                     <div class="bg-white p-8 md:p-10 rounded-3xl shadow-xl shadow-brand-neutral/50 border-r-4 border-brand-primary hover:-translate-y-2 transition-transform duration-500">
                         <h2 class="text-3xl font-extrabold text-slate-800 mb-4 flex items-center gap-4">
                             <i data-lucide="clapperboard" class="text-brand-primary" width="32" height="32"></i> WHAT WE DO
@@ -1709,10 +1774,11 @@
         
     </main>
 
-    <footer class="bg-brand-dark text-white pt-24 pb-16 md:pb-10 relative z-10">
-        <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-16 text-center md:text-left">
+    <!-- Elegant Dark Footer -->
+    <footer class="bg-brand-dark text-white pt-24 pb-20 md:pb-12 relative z-10 w-full overflow-hidden shrink-0 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-12 text-center md:text-left">
             <div class="flex flex-col items-center md:items-start group">
-                <div class="flex items-center gap-4 mb-8 text-brand-secondary group-hover:text-brand-accent transition-colors duration-300">
+                <div class="flex items-center gap-4 mb-6 text-brand-secondary group-hover:text-brand-accent transition-colors duration-300">
                     <i data-lucide="map-pin" width="24" height="24" stroke-width="1.5" class="group-hover:scale-110 transition-transform duration-300"></i>
                     <h3 class="font-semibold tracking-widest uppercase text-lg text-white">Location</h3>
                 </div>
@@ -1720,25 +1786,26 @@
                 <p class="text-brand-neutral font-light text-lg">Brampton, ON L6T 4T5</p>
             </div>
             <div class="flex flex-col items-center md:items-start group">
-                <div class="flex items-center gap-4 mb-8 text-brand-secondary group-hover:text-brand-accent transition-colors duration-300">
+                <div class="flex items-center gap-4 mb-6 text-brand-secondary group-hover:text-brand-accent transition-colors duration-300">
                     <i data-lucide="phone" width="24" height="24" stroke-width="1.5" class="group-hover:scale-110 transition-transform duration-300"></i>
                     <h3 class="font-semibold tracking-widest uppercase text-lg text-white">Contact</h3>
                 </div>
                 <p class="text-brand-neutral font-light text-lg hover:text-white cursor-pointer transition-colors duration-300">905-452-7264</p>
             </div>
             <div class="flex flex-col items-center md:items-start group">
-                <div class="flex items-center gap-4 mb-8 text-brand-secondary group-hover:text-brand-accent transition-colors duration-300">
+                <div class="flex items-center gap-4 mb-6 text-brand-secondary group-hover:text-brand-accent transition-colors duration-300">
                     <i data-lucide="mail" width="24" height="24" stroke-width="1.5" class="group-hover:scale-110 transition-transform duration-300"></i>
                     <h3 class="font-semibold tracking-widest uppercase text-lg text-white">Email</h3>
                 </div>
-                <a href="mailto:info@cogsabbath.org" class="text-brand-neutral font-light text-lg hover:text-white transition-colors duration-300">
+                <a href="mailto:info@cogsabbath.org" class="text-brand-neutral font-light text-lg hover:text-white transition-colors duration-300 break-all">
                     info@cogsabbath.org
                 </a>
             </div>
         </div>
 
-        <div class="max-w-7xl mx-auto px-4 mt-24 pt-8 border-t border-brand-primary flex flex-col md:flex-row justify-between items-center gap-8">
+        <div class="max-w-7xl mx-auto px-4 mt-20 pt-8 border-t border-brand-primary flex flex-col md:flex-row justify-between items-center gap-8">
             <div class="flex gap-4 md:gap-6">
+                <!-- Replaced Lucide icons with raw SVGs for brand logos -->
                 <a href="https://www.facebook.com/ChurchofGodSabbathKeepingMinistriesBrampton" target="_blank" rel="noopener noreferrer" class="bg-brand-primary p-4 rounded-full text-brand-neutral hover:bg-brand-accent hover:text-brand-dark hover:scale-110 hover:-translate-y-1 transition-all duration-300 shadow-lg flex items-center justify-center">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
                 </a>
@@ -1754,59 +1821,34 @@
                     </svg>
                 </a>
             </div>
-            <div class="text-center md:text-right text-xs text-brand-secondary tracking-wide font-light">
-                <p class="mb-3 leading-relaxed break-words">OTHER LOCATIONS: TORONTO | MISSISSAUGA | SCARBOROUGH | MONTREAL | OTTAWA | OSHAWA | SYRACUSE</p>
+            <div class="text-center md:text-right text-xs text-brand-secondary tracking-wide font-light leading-relaxed">
+                <p class="mb-2">OTHER LOCATIONS: TORONTO | MISSISSAUGA | SCARBOROUGH | MONTREAL | OTTAWA | OSHAWA | SYRACUSE</p>
                 <p>© 2026 CHURCH OF GOD SABBATH-KEEPING MINISTRIES. ALL RIGHTS RESERVED.</p>
             </div>
         </div>
     </footer>
-    
-    <div id="video-modal" class="fixed inset-0 z-[100] flex items-center justify-center px-4 opacity-0 pointer-events-none transition-opacity duration-300">
-        <div class="absolute inset-0 bg-slate-900/90 backdrop-blur-sm" onclick="closeVideoModal()"></div>
-        <div class="bg-black w-full max-w-5xl aspect-video rounded-2xl shadow-2xl relative z-10 transform scale-95 transition-transform duration-300" id="video-modal-content">
-            <button onclick="closeVideoModal()" class="absolute -top-12 right-0 text-white hover:text-brand-accent p-2 transition-colors z-20 flex items-center gap-2 font-bold tracking-wider uppercase text-sm">
-                Close <i data-lucide="x" width="24" height="24"></i>
-            </button>
-            <iframe id="youtube-player" class="w-full h-full rounded-2xl" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        </div>
-    </div>
 </div>
 
+<!-- Interaction Logic -->
 <script>
     // Initialize Lucide Icons
     lucide.createIcons();
 
-    // ----------------------------------------------------
-    // SCROLL ANIMATION LOGIC (Intersection Observer)
-    // ----------------------------------------------------
-    let scrollObserver;
-
-    function initScrollAnimations() {
-        if (scrollObserver) {
-            scrollObserver.disconnect();
-        }
-        
-        scrollObserver = new IntersectionObserver((entries, obs) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('is-visible');
-                    // Unobserve so it only animates once per page visit
-                    obs.unobserve(entry.target); 
-                }
-            });
-        }, {
-            root: document.getElementById('app-container'), // Important: this targets your specific scroll container
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        });
-
-        // Target all elements that should animate
-        document.querySelectorAll('.reveal-up, .reveal-fade').forEach(el => {
-            scrollObserver.observe(el);
-        });
-    }
-
     let currentPage = 'home';
+
+    // Intersection Observer for scroll animations
+    const animationObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('play-anim');
+                // Optional: Unobserve to only animate once, or leave to animate repeatedly
+                animationObserver.unobserve(entry.target); 
+            }
+        });
+    }, { 
+        threshold: 0.1, 
+        rootMargin: "0px 0px -50px 0px" 
+    });
 
     // Router function mirroring React state
     function navigateTo(pageId) {
@@ -1821,16 +1863,12 @@
         if (targetPage) {
             targetPage.classList.remove('hidden');
             
-            // Reset animations for the new page so they re-trigger smoothly
-            const animatedEls = targetPage.querySelectorAll('.reveal-up, .reveal-fade');
+            // Re-trigger / Observe animations for newly visible page
+            const animatedEls = targetPage.querySelectorAll('.animate-fade-in-up, .animate-fade-in');
             animatedEls.forEach(el => {
-                el.classList.remove('is-visible');
+                el.classList.remove('play-anim');
+                animationObserver.observe(el);
             });
-            
-            // Initialize observer on the newly visible elements
-            setTimeout(() => {
-                initScrollAnimations();
-            }, 50);
         }
 
         // Close mobile menu if open
@@ -1926,48 +1964,8 @@
             iconX.classList.add('hidden');
         }
     }
-
-    // ----------------------------------------------------
-    // VIDEO MODAL LOGIC (Sermons)
-    // ----------------------------------------------------
-    function openVideoModal(videoId) {
-        const modal = document.getElementById('video-modal');
-        const content = document.getElementById('video-modal-content');
-        const player = document.getElementById('youtube-player');
-        
-        // Check if videoId already has parameters
-        const separator = videoId.includes('?') ? '&' : '?';
-        
-        // Load the video and set to autoplay
-        player.src = `https://www.youtube.com/embed/${videoId}${separator}autoplay=1`;
-        
-        modal.classList.remove('opacity-0', 'pointer-events-none');
-        content.classList.remove('scale-95');
-        content.classList.add('scale-100');
-        
-        // Prevent background scrolling
-        document.getElementById('app-container').style.overflowY = 'hidden';
-    }
-
-    function closeVideoModal() {
-        const modal = document.getElementById('video-modal');
-        const content = document.getElementById('video-modal-content');
-        const player = document.getElementById('youtube-player');
-        
-        modal.classList.add('opacity-0', 'pointer-events-none');
-        content.classList.remove('scale-100');
-        content.classList.add('scale-95');
-        
-        // Stop video playback by clearing src, slight delay allows transition to finish
-        setTimeout(() => { 
-            player.src = ''; 
-        }, 300);
-        
-        // Restore background scrolling
-        document.getElementById('app-container').style.overflowY = 'auto';
-    }
     
-    // Leadership Bio Modal Logic
+    // Leadership Bio Modal Logic 
     const staffData = [
         {"name":"Dr. Clarence Duff","title":"Main Pastor","bio":"Dr. Clarence Duff has been leading our congregation with a deep passion for the Word of God and a heart for community outreach. [This is a placeholder biography. Click here to add more details about Dr. Duff's education, family, calling, and specific ministry passions.]","image":"https:\/\/images.unsplash.com\/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=500&q=80"},
         {"name":"Pastor David Brown","title":"Associate Pastor","bio":"Pastor David Brown brings a wealth of experience and a pastoral heart to our church. [This is a placeholder biography. Insert details about Pastor Brown's background, areas of focus within the church, and personal testimony.]","image":"https:\/\/images.unsplash.com\/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=500&q=80"},
@@ -2056,10 +2054,8 @@
         }, 300);
     }
 
-    // Initialize the site
-    updateNavStates('home');
-    document.getElementById('page-home').classList.remove('hidden');
-    initScrollAnimations();
+    // Set initial active state and begin observations
+    navigateTo('home');
 
 </script>
 
