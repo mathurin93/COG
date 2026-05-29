@@ -1771,6 +1771,333 @@
                 </div>
             </section>
         </div>
+
+        <!-- PAGE: ONLINE REGISTRATION -->
+        <div id="page-online_registration" class="page-section hidden bg-brand-neutral/5 min-h-screen">
+            <section class="bg-white py-24 text-center border-b border-brand-neutral/30 shadow-sm px-4 animate-fade-in relative overflow-hidden">
+                <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#dad7d2_1px,transparent_1px)] [background-size:20px_20px]"></div>
+                <div class="relative z-10 max-w-4xl mx-auto">
+                    <h1 class="text-4xl md:text-5xl font-extrabold text-slate-800 mb-4 tracking-tight uppercase">
+                        ONLINE <span class="text-brand-primary font-light ml-2">REGISTRATION</span>
+                    </h1>
+                    <div class="h-1 w-20 bg-brand-secondary mx-auto mt-6 rounded-full mb-8"></div>
+                    <p class="text-lg text-slate-600 font-light leading-relaxed animate-fade-in-up stagger-1">
+                        Sign up for upcoming classes, baptisms, dedications, or specialized ministry events.
+                    </p>
+                </div>
+            </section>
+
+            <section class="py-24 px-4 max-w-4xl mx-auto animate-fade-in-up stagger-2">
+                <div class="bg-white p-8 md:p-12 rounded-[2.5rem] shadow-2xl border border-brand-neutral/30">
+                    <form onsubmit="event.preventDefault(); this.innerHTML = '<div class=\'py-16 text-center\'><i data-lucide=\'check-circle\' class=\'mx-auto text-green-500 mb-4\' width=\'64\' height=\'64\'></i><h3 class=\'text-3xl font-extrabold text-slate-800 mb-4\'>Registration Complete!</h3><p class=\'text-slate-600 text-lg font-light\'>Thank you for registering. We will reach out to you with further details shortly.</p></div>'; lucide.createIcons();" class="space-y-8">
+                        
+                        <div class="grid md:grid-cols-2 gap-8">
+                            <div class="space-y-2">
+                                <label class="text-sm font-bold text-slate-700 uppercase tracking-wide">First Name</label>
+                                <input type="text" required class="w-full px-5 py-4 bg-brand-neutral/10 border border-brand-neutral/50 rounded-xl focus:outline-none focus:border-brand-primary focus:ring-1 focus:ring-brand-primary transition-colors" placeholder="John">
+                            </div>
+                            <div class="space-y-2">
+                                <label class="text-sm font-bold text-slate-700 uppercase tracking-wide">Last Name</label>
+                                <input type="text" required class="w-full px-5 py-4 bg-brand-neutral/10 border border-brand-neutral/50 rounded-xl focus:outline-none focus:border-brand-primary focus:ring-1 focus:ring-brand-primary transition-colors" placeholder="Doe">
+                            </div>
+                        </div>
+
+                        <div class="grid md:grid-cols-2 gap-8">
+                            <div class="space-y-2">
+                                <label class="text-sm font-bold text-slate-700 uppercase tracking-wide">Email Address</label>
+                                <input type="email" required class="w-full px-5 py-4 bg-brand-neutral/10 border border-brand-neutral/50 rounded-xl focus:outline-none focus:border-brand-primary focus:ring-1 focus:ring-brand-primary transition-colors" placeholder="john@example.com">
+                            </div>
+                            <div class="space-y-2">
+                                <label class="text-sm font-bold text-slate-700 uppercase tracking-wide">Phone Number</label>
+                                <input type="tel" required class="w-full px-5 py-4 bg-brand-neutral/10 border border-brand-neutral/50 rounded-xl focus:outline-none focus:border-brand-primary focus:ring-1 focus:ring-brand-primary transition-colors" placeholder="(555) 123-4567">
+                            </div>
+                        </div>
+
+                        <div class="space-y-2">
+                            <label class="text-sm font-bold text-slate-700 uppercase tracking-wide">Registration Type</label>
+                            <div class="relative">
+                                <select required class="w-full px-5 py-4 bg-brand-neutral/10 border border-brand-neutral/50 rounded-xl appearance-none focus:outline-none focus:border-brand-primary focus:ring-1 focus:ring-brand-primary transition-colors text-slate-700">
+                                    <option value="" disabled selected>Select an option...</option>
+                                    <option value="baptism">Baptism Class</option>
+                                    <option value="membership">New Member Orientation</option>
+                                    <option value="dedication">Baby Dedication</option>
+                                    <option value="counseling">Marriage Counseling</option>
+                                    <option value="event">Special Event / Conference</option>
+                                </select>
+                                <i data-lucide="chevron-down" class="absolute right-5 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" width="20" height="20"></i>
+                            </div>
+                        </div>
+
+                        <div class="space-y-2">
+                            <label class="text-sm font-bold text-slate-700 uppercase tracking-wide">Additional Comments / Details</label>
+                            <textarea rows="4" class="w-full px-5 py-4 bg-brand-neutral/10 border border-brand-neutral/50 rounded-xl focus:outline-none focus:border-brand-primary focus:ring-1 focus:ring-brand-primary transition-colors resize-none" placeholder="Provide any additional details or requirements here..."></textarea>
+                        </div>
+
+                        <button type="submit" class="w-full bg-brand-primary hover:bg-brand-dark text-white font-bold tracking-widest uppercase py-5 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300">
+                            Submit Registration
+                        </button>
+                    </form>
+                </div>
+            </section>
+        </div>
+
+        <!-- PAGE: UPCOMING EVENTS -->
+        <div id="page-upcoming_events" class="page-section hidden bg-white min-h-screen">
+            <section class="bg-brand-dark py-24 text-center border-b border-brand-neutral/50 shadow-sm px-4 animate-fade-in relative overflow-hidden text-white">
+                <div class="absolute inset-0 opacity-10 bg-[url('https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=1920&q=80')] bg-cover bg-center"></div>
+                <div class="relative z-10 max-w-4xl mx-auto">
+                    <h1 class="text-4xl md:text-5xl font-extrabold mb-4 tracking-tight uppercase">
+                        UPCOMING <span class="text-brand-accent font-light ml-2">EVENTS</span>
+                    </h1>
+                    <div class="h-1 w-20 bg-brand-accent mx-auto mt-6 rounded-full mb-8"></div>
+                    <p class="text-lg text-brand-neutral font-light leading-relaxed animate-fade-in-up stagger-1">
+                        Join us for fellowship, learning, and community service. There is always a place for you.
+                    </p>
+                </div>
+            </section>
+
+            <section class="py-24 px-4 max-w-7xl mx-auto">
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+                    
+                    <!-- Event 1 -->
+                    <div class="bg-white rounded-[2rem] overflow-hidden shadow-xl border border-brand-neutral/30 group hover:-translate-y-2 hover:shadow-2xl transition-all duration-500 animate-fade-in-up stagger-1 flex flex-col">
+                        <div class="relative h-56 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1544717302-de2939b7ef71?auto=format&fit=crop&w=800&q=80" alt="Community BBQ" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"/>
+                            <div class="absolute top-4 left-4 bg-white/95 backdrop-blur-sm text-brand-primary font-bold py-2 px-4 rounded-xl shadow-lg text-center leading-tight">
+                                <span class="block text-sm uppercase">JUL</span>
+                                <span class="block text-2xl">15</span>
+                            </div>
+                        </div>
+                        <div class="p-8 flex flex-col flex-grow">
+                            <div class="flex items-center gap-2 text-brand-secondary text-sm font-semibold mb-3">
+                                <i data-lucide="clock" width="16" height="16"></i> 12:00 PM - 4:00 PM
+                            </div>
+                            <h3 class="text-2xl font-extrabold text-slate-800 mb-3 line-clamp-2">Annual Community BBQ</h3>
+                            <p class="text-slate-600 font-light flex-grow mb-6">Join us for food, games, and fellowship as we celebrate summer with our community. Open to everyone!</p>
+                            <button onclick="navigateTo('online_registration')" class="w-full bg-brand-neutral/20 text-brand-primary hover:bg-brand-primary hover:text-white font-bold py-3 rounded-xl transition-colors duration-300">
+                                Register Now
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Event 2 -->
+                    <div class="bg-white rounded-[2rem] overflow-hidden shadow-xl border border-brand-neutral/30 group hover:-translate-y-2 hover:shadow-2xl transition-all duration-500 animate-fade-in-up stagger-2 flex flex-col">
+                        <div class="relative h-56 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=800&q=80" alt="Youth Retreat" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"/>
+                            <div class="absolute top-4 left-4 bg-white/95 backdrop-blur-sm text-brand-primary font-bold py-2 px-4 rounded-xl shadow-lg text-center leading-tight">
+                                <span class="block text-sm uppercase">AUG</span>
+                                <span class="block text-2xl">05</span>
+                            </div>
+                        </div>
+                        <div class="p-8 flex flex-col flex-grow">
+                            <div class="flex items-center gap-2 text-brand-secondary text-sm font-semibold mb-3">
+                                <i data-lucide="clock" width="16" height="16"></i> Friday - Sunday
+                            </div>
+                            <h3 class="text-2xl font-extrabold text-slate-800 mb-3 line-clamp-2">RYM Summer Retreat</h3>
+                            <p class="text-slate-600 font-light flex-grow mb-6">A weekend getaway for young adults and youth to unplug, connect with God, and build lasting relationships.</p>
+                            <button onclick="navigateTo('online_registration')" class="w-full bg-brand-neutral/20 text-brand-primary hover:bg-brand-primary hover:text-white font-bold py-3 rounded-xl transition-colors duration-300">
+                                Register Now
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Event 3 -->
+                    <div class="bg-white rounded-[2rem] overflow-hidden shadow-xl border border-brand-neutral/30 group hover:-translate-y-2 hover:shadow-2xl transition-all duration-500 animate-fade-in-up stagger-3 flex flex-col">
+                        <div class="relative h-56 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1490730141103-6cac27aaab94?auto=format&fit=crop&w=800&q=80" alt="Women's Conference" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"/>
+                            <div class="absolute top-4 left-4 bg-white/95 backdrop-blur-sm text-brand-primary font-bold py-2 px-4 rounded-xl shadow-lg text-center leading-tight">
+                                <span class="block text-sm uppercase">SEP</span>
+                                <span class="block text-2xl">22</span>
+                            </div>
+                        </div>
+                        <div class="p-8 flex flex-col flex-grow">
+                            <div class="flex items-center gap-2 text-brand-secondary text-sm font-semibold mb-3">
+                                <i data-lucide="clock" width="16" height="16"></i> 9:00 AM - 3:00 PM
+                            </div>
+                            <h3 class="text-2xl font-extrabold text-slate-800 mb-3 line-clamp-2">Women of Essence Conference</h3>
+                            <p class="text-slate-600 font-light flex-grow mb-6">A powerful day of worship, guest speakers, and empowerment designed specifically for women of all ages.</p>
+                            <button onclick="navigateTo('online_registration')" class="w-full bg-brand-neutral/20 text-brand-primary hover:bg-brand-primary hover:text-white font-bold py-3 rounded-xl transition-colors duration-300">
+                                Register Now
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+        </div>
+
+        <!-- PAGE: ASK THE PASTOR -->
+        <div id="page-ask_pastor" class="page-section hidden bg-brand-neutral/5 min-h-screen">
+            <section class="bg-white py-24 text-center border-b border-brand-neutral/30 shadow-sm px-4 animate-fade-in relative overflow-hidden">
+                <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#dad7d2_1px,transparent_1px)] [background-size:20px_20px]"></div>
+                <div class="relative z-10 max-w-4xl mx-auto">
+                    <h1 class="text-4xl md:text-5xl font-extrabold text-slate-800 mb-4 tracking-tight uppercase">
+                        ASK THE <span class="text-brand-primary font-light ml-2">PASTOR</span>
+                    </h1>
+                    <div class="h-1 w-20 bg-brand-secondary mx-auto mt-6 rounded-full mb-8"></div>
+                </div>
+            </section>
+
+            <section class="py-24 px-4 max-w-7xl mx-auto grid md:grid-cols-5 gap-16 items-start">
+                <div class="md:col-span-2 space-y-8 animate-fade-in-up stagger-1">
+                    <div class="bg-brand-primary text-white p-10 rounded-[2.5rem] shadow-2xl relative overflow-hidden">
+                        <div class="absolute -bottom-10 -right-10 opacity-10">
+                            <i data-lucide="message-circle" width="200" height="200"></i>
+                        </div>
+                        <h2 class="text-3xl font-extrabold mb-6 relative z-10">Have a Question?</h2>
+                        <p class="text-brand-neutral font-light leading-relaxed mb-6 relative z-10">
+                            Whether you're seeking biblical clarity, struggling with a life decision, or just need pastoral guidance, we are here to help. 
+                        </p>
+                        <p class="text-brand-neutral font-light leading-relaxed relative z-10">
+                            Submit your questions using the form. Please note that while we read all submissions, we may address common questions during our sermons or bible studies anonymously to benefit the whole congregation.
+                        </p>
+                        <div class="mt-8 flex items-center gap-3 text-brand-accent font-bold relative z-10">
+                            <i data-lucide="shield-check" width="24" height="24"></i> 100% Confidential
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="md:col-span-3 bg-white p-8 md:p-12 rounded-[2.5rem] shadow-xl border border-brand-neutral/30 animate-fade-in-up stagger-2">
+                    <form onsubmit="event.preventDefault(); this.innerHTML = '<div class=\'py-16 text-center\'><i data-lucide=\'check-circle\' class=\'mx-auto text-green-500 mb-4\' width=\'64\' height=\'64\'></i><h3 class=\'text-3xl font-extrabold text-slate-800 mb-4\'>Question Submitted</h3><p class=\'text-slate-600 text-lg font-light\'>Thank you for reaching out. A pastor will review your question shortly.</p></div>'; lucide.createIcons();" class="space-y-8">
+                        
+                        <div class="grid md:grid-cols-2 gap-8">
+                            <div class="space-y-2">
+                                <label class="text-sm font-bold text-slate-700 uppercase tracking-wide">Name (Optional)</label>
+                                <input type="text" class="w-full px-5 py-4 bg-brand-neutral/10 border border-brand-neutral/50 rounded-xl focus:outline-none focus:border-brand-primary focus:ring-1 focus:ring-brand-primary transition-colors" placeholder="Your Name">
+                            </div>
+                            <div class="space-y-2">
+                                <label class="text-sm font-bold text-slate-700 uppercase tracking-wide">Email (Optional)</label>
+                                <input type="email" class="w-full px-5 py-4 bg-brand-neutral/10 border border-brand-neutral/50 rounded-xl focus:outline-none focus:border-brand-primary focus:ring-1 focus:ring-brand-primary transition-colors" placeholder="For a direct reply">
+                            </div>
+                        </div>
+
+                        <div class="space-y-2">
+                            <label class="text-sm font-bold text-slate-700 uppercase tracking-wide">Category</label>
+                            <div class="relative">
+                                <select required class="w-full px-5 py-4 bg-brand-neutral/10 border border-brand-neutral/50 rounded-xl appearance-none focus:outline-none focus:border-brand-primary focus:ring-1 focus:ring-brand-primary transition-colors text-slate-700">
+                                    <option value="" disabled selected>What is this regarding?</option>
+                                    <option value="theology">Theological / Biblical Question</option>
+                                    <option value="guidance">Personal Guidance</option>
+                                    <option value="prayer">Prayer Request</option>
+                                    <option value="other">Other</option>
+                                </select>
+                                <i data-lucide="chevron-down" class="absolute right-5 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" width="20" height="20"></i>
+                            </div>
+                        </div>
+
+                        <div class="space-y-2">
+                            <label class="text-sm font-bold text-slate-700 uppercase tracking-wide">Your Question / Message</label>
+                            <textarea required rows="6" class="w-full px-5 py-4 bg-brand-neutral/10 border border-brand-neutral/50 rounded-xl focus:outline-none focus:border-brand-primary focus:ring-1 focus:ring-brand-primary transition-colors resize-none" placeholder="Type your question here..."></textarea>
+                        </div>
+
+                        <button type="submit" class="bg-brand-primary hover:bg-brand-dark text-white font-bold tracking-widest uppercase py-5 px-10 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 w-full md:w-auto">
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+            </section>
+        </div>
+
+        <!-- PAGE: CONTACT -->
+        <div id="page-contact" class="page-section hidden bg-white min-h-screen">
+            <section class="bg-white py-24 text-center border-b border-brand-neutral/30 shadow-sm px-4 animate-fade-in relative overflow-hidden">
+                <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#dad7d2_1px,transparent_1px)] [background-size:20px_20px]"></div>
+                <div class="relative z-10 max-w-4xl mx-auto">
+                    <h1 class="text-4xl md:text-5xl font-extrabold text-slate-800 mb-4 tracking-tight uppercase">
+                        GET IN <span class="text-brand-primary font-light ml-2">TOUCH</span>
+                    </h1>
+                    <div class="h-1 w-20 bg-brand-secondary mx-auto mt-6 rounded-full mb-8"></div>
+                    <p class="text-lg text-slate-600 font-light leading-relaxed animate-fade-in-up stagger-1">
+                        We would love to hear from you. Reach out to us for any inquiries, and we'll get back to you as soon as possible.
+                    </p>
+                </div>
+            </section>
+
+            <section class="py-24 px-4 max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-start">
+                
+                <!-- Contact Form -->
+                <div class="bg-brand-neutral/5 p-8 md:p-12 rounded-[2.5rem] shadow-lg border border-brand-neutral/30 animate-fade-in-up stagger-2">
+                    <h3 class="text-2xl font-extrabold text-slate-800 mb-8 tracking-wide">SEND A MESSAGE</h3>
+                    <form onsubmit="event.preventDefault(); this.innerHTML = '<div class=\'py-16 text-center\'><i data-lucide=\'check-circle\' class=\'mx-auto text-green-500 mb-4\' width=\'64\' height=\'64\'></i><h3 class=\'text-3xl font-extrabold text-slate-800 mb-4\'>Message Sent!</h3><p class=\'text-slate-600 text-lg font-light\'>Thank you for contacting us. We will reply to your email soon.</p></div>'; lucide.createIcons();" class="space-y-6">
+                        <div class="space-y-2">
+                            <label class="text-sm font-bold text-slate-700 uppercase tracking-wide">Full Name</label>
+                            <input type="text" required class="w-full px-5 py-4 bg-white border border-brand-neutral/50 rounded-xl focus:outline-none focus:border-brand-primary focus:ring-1 focus:ring-brand-primary transition-colors">
+                        </div>
+                        <div class="space-y-2">
+                            <label class="text-sm font-bold text-slate-700 uppercase tracking-wide">Email Address</label>
+                            <input type="email" required class="w-full px-5 py-4 bg-white border border-brand-neutral/50 rounded-xl focus:outline-none focus:border-brand-primary focus:ring-1 focus:ring-brand-primary transition-colors">
+                        </div>
+                        <div class="space-y-2">
+                            <label class="text-sm font-bold text-slate-700 uppercase tracking-wide">Message</label>
+                            <textarea required rows="5" class="w-full px-5 py-4 bg-white border border-brand-neutral/50 rounded-xl focus:outline-none focus:border-brand-primary focus:ring-1 focus:ring-brand-primary transition-colors resize-none"></textarea>
+                        </div>
+                        <button type="submit" class="bg-brand-primary hover:bg-brand-dark text-white font-bold tracking-widest uppercase py-4 px-10 rounded-xl shadow-md hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 w-full md:w-auto">
+                            Submit
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Contact Info -->
+                <div class="space-y-10 animate-fade-in-up stagger-3">
+                    <div class="flex items-start gap-6 group">
+                        <div class="bg-brand-primary/10 p-4 rounded-full text-brand-primary group-hover:bg-brand-primary group-hover:text-white transition-colors duration-300 shrink-0">
+                            <i data-lucide="map-pin" width="32" height="32"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-slate-800 mb-2 uppercase tracking-wide">Location</h3>
+                            <p class="text-slate-600 text-lg font-light leading-relaxed">6 Westwyn Crt<br>Brampton, ON L6T 4T5</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-6 group">
+                        <div class="bg-brand-primary/10 p-4 rounded-full text-brand-primary group-hover:bg-brand-primary group-hover:text-white transition-colors duration-300 shrink-0">
+                            <i data-lucide="phone" width="32" height="32"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-slate-800 mb-2 uppercase tracking-wide">Phone</h3>
+                            <p class="text-slate-600 text-lg font-light leading-relaxed">905-452-7264</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-6 group">
+                        <div class="bg-brand-primary/10 p-4 rounded-full text-brand-primary group-hover:bg-brand-primary group-hover:text-white transition-colors duration-300 shrink-0">
+                            <i data-lucide="mail" width="32" height="32"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-slate-800 mb-2 uppercase tracking-wide">Email</h3>
+                            <p class="text-slate-600 text-lg font-light leading-relaxed break-all"><a href="mailto:info@cogsabbath.org" class="hover:text-brand-primary transition-colors">info@cogsabbath.org</a></p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-6 group">
+                        <div class="bg-brand-primary/10 p-4 rounded-full text-brand-primary group-hover:bg-brand-primary group-hover:text-white transition-colors duration-300 shrink-0">
+                            <i data-lucide="clock" width="32" height="32"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-slate-800 mb-2 uppercase tracking-wide">Service Time</h3>
+                            <p class="text-slate-600 text-lg font-light leading-relaxed">Saturdays at 11:30 AM</p>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+
+            <!-- Reused Map Section -->
+            <section class="pb-24 px-4 max-w-7xl mx-auto">
+                <div class="rounded-[2.5rem] overflow-hidden shadow-2xl h-[450px] animate-fade-in-up stagger-4 relative group border-4 border-brand-neutral/20">
+                    <a href="https://maps.app.goo.gl/e1DS9rbSDKhefUmD9" target="_blank" rel="noopener noreferrer" class="block w-full h-full relative cursor-pointer">
+                        <div class="absolute inset-0 bg-transparent z-10 pointer-events-none"></div>
+                        <iframe src="https://maps.google.com/maps?q=6%20Westwyn%20Crt,%20Brampton,%20ON&t=&z=14&ie=UTF8&iwloc=&output=embed" width="100%" height="100%" style="border:0; pointer-events:none;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" class="absolute inset-0 z-0 transform group-hover:scale-105 transition-transform duration-700"></iframe>
+                        
+                        <div class="absolute inset-0 z-20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                            <div class="bg-white/95 backdrop-blur-sm text-brand-primary font-bold py-4 px-8 rounded-full shadow-2xl flex items-center gap-3 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
+                                Open in Google Maps <i data-lucide="map" width="20" height="20"></i>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </section>
+        </div>
         
     </main>
 
